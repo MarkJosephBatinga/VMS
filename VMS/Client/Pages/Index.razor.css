@@ -1,0 +1,98 @@
+﻿.header-box {
+    width: 100%;
+}
+
+.head-title {
+    font-family: 'Playfair Display';
+    font-style: normal;
+    font-weight: 900;
+    font-size: 3.5rem;
+    text-align: center;
+    margin: 70px 20px;
+    color: #79DAE8;
+}
+
+    .head-title > .change-color {
+        color: #2155CD;
+    }
+
+.content-box {
+    width: 100%;
+}
+
+.globe-img {
+    width: 70%;
+}
+
+.content-title {
+    font-family: 'Playfair Display';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 2.5rem;
+    line-height: 53px;
+    color: #2155CD;
+}
+
+.content-text {
+    font-family: 'Source Sans Pro';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 30px;
+    color: #0AA1DD;
+}
+
+.content-btn {
+    background: #0AA1DD;
+    border-radius: 20px;
+    border: none;
+    font-family: 'Playfair Display';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 1.6rem;
+    text-align: center;
+    color: #E8F9FD;
+    padding: 10px 50px;
+}
+
+    .content-btn:hover {
+        background: #79DAE8;
+    }
+
+.vaccine-man {
+    width: 30%;
+}
+
+@media screen and (max-width: 1000px) {
+    .nav-btn {
+        padding: 10px 12px;
+        font-family: 'Playfair Display';
+        font-size: 1rem;
+        color: #2155CD;
+    }
+
+    .footer-title {
+        font-size: .8rem;
+    }
+
+    .footer-subtitle {
+        font-size: .8rem;
+    }
+
+    .globe-img {
+        width: 100%;
+    }
+
+    .content-title {
+        font-size: 1.7rem;
+    }
+
+    .content-text {
+        font-size: 1.1rem;
+    }
+
+    .content-btn {
+        font-size: 1.2rem;
+        padding: 10px 50px;
+    }
+}

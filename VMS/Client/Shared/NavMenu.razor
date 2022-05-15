@@ -1,0 +1,13 @@
+﻿@inject NavigationManager NavManager
+
+<nav class="main-nav d-flex align-items-center px-3 px-md-5 py-3">
+    <a href="/" class="nav-logo me-auto">VMS</a>
+    <button class="nav-btn" @onclick="OnAdmin">Proceed as Admin</button>
+</nav>
+
+@code {
+    private void OnAdmin()
+    {
+        NavManager.NavigateTo("/admin/login");
+    }
+}

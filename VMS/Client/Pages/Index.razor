@@ -1,0 +1,32 @@
+﻿@page "/"
+@inject NavigationManager NavManager
+
+<section class="main-body px-3 px-md-5 my-3">
+    <div class="header-box">
+        <h2 class="head-title">Saving Lives <span class="change-color">One Shot at a Time</span></h2>
+    </div>
+    <div class="content-box row">
+        <div class="img-box col-md d-flex justify-content-end">
+            <img src="./css/images/globe-img.png" class="globe-img" alt="Globe With Frontliners">
+        </div>
+        <div class="text-box col-md d-flex flex-column justify-content-center pe-md-5">
+            <h4 class="content-title mb-4">Vaccination Management System</h4>
+            <p class="content-text  mb-4">
+                With our vaccine scheduling system,
+                finding a COVID-19 vaccination appointment is now easier than ever. Simply provides
+                your information and we'll help you find the best time and place for you to get your vaccine.
+            </p>
+            <div class="content-box d-flex align-items-start justify-content-between">
+                <button class="content-btn" @onclick="OnLogin">Get Started</button>
+                <img src="./css/images/live-vaccine.png" alt="Vaccine with Injection" class="vaccine-man">
+            </div>
+        </div>
+    </div>
+</section>
+
+@code {
+    private void OnLogin()
+    {
+        NavManager.NavigateTo("/user/login");
+    }
+}

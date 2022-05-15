@@ -1,0 +1,32 @@
+﻿.main-footer {
+    width: 100%;
+    background-color: #2155CD;
+}
+
+.footer-title {
+    font-family: 'Source Sans Pro';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1.2rem;
+    margin: 0px;
+    color: #E8F9FD;
+}
+
+.footer-subtitle {
+    font-family: 'Source Sans Pro';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1.2rem;
+    margin: 0px;
+    color: #E8F9FD;
+}
+
+@media screen and (max-width: 600px) {
+    .footer-title {
+        font-size: .8rem;
+    }
+
+    .footer-subtitle {
+        font-size: .8rem;
+    }
+}

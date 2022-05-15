@@ -1,0 +1,13 @@
+﻿@inject NavigationManager NavManager
+
+<nav class="main-nav d-flex align-items-center px-3 px-md-5 py-3">
+    <a href="/" class="nav-logo me-auto">VMS</a>
+    <button class="nav-btn" @onclick="OnUser">Proceed as User</button>
+</nav>
+
+@code {
+    private void OnUser()
+    {
+        NavManager.NavigateTo("/user/login");
+    }
+}
