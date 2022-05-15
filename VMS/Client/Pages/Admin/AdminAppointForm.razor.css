@@ -1,0 +1,120 @@
+﻿/* Search button */
+.title-img {
+    width: 80px;
+}
+
+.search-btn {
+    width: 30px;
+}
+
+.title-text {
+    font-family: 'Source Sans Pro';
+    font-style: normal;
+    font-weight: 900;
+    font-size: 3.5rem;
+    letter-spacing: 0.05em;
+    color: #0AA1DD;
+}
+
+.user-email {
+    font-family: 'Source Sans Pro';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 1.7rem;
+    color: #0AA1DD;
+}
+
+.form-box {
+    background: #79DAE8;
+    box-shadow: 4px 4px 4px #2155CD;
+    border-radius: 20px;
+    padding: 40px;
+}
+
+.group-title {
+    font-family: 'Source Sans Pro';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 1.7rem;
+    color: #0AA1DD;
+    margin: 0px;
+}
+
+.form-label {
+    font-family: 'Source Sans Pro';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 1.3rem;
+    color: #E8F9FD;
+    margin: 0;
+}
+
+.form-input {
+    width: 100%;
+    background: #E8F9FD;
+    box-shadow: 0px 4px 4px #2155CD;
+    border-radius: 10px;
+    border: none;
+    padding: 5px 10px;
+    font-family: 'Source Sans Pro';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 1rem;
+    color: #2155CD;
+    margin: 0;
+}
+
+.submit-btn {
+    border: 3px solid #E8F9FD;
+    border-radius: 10px;
+    background-color: transparent;
+    padding: 5px 30px;
+    font-family: 'Source Sans Pro';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 1.5rem;
+    text-align: center;
+    color: #E8F9FD;
+}
+
+    .submit-btn:hover {
+        background-color: #2155CD;
+        border: 3px solid #2155CD;
+    }
+
+.cancel-btn {
+    border: 3px solid #E8F9FD;
+    border-radius: 10px;
+    background-color: transparent;
+    padding: 5px 30px;
+    font-family: 'Source Sans Pro';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 1.5rem;
+    text-align: center;
+    color: #E8F9FD;
+    text-decoration: none;
+}
+
+    .cancel-btn:hover {
+        background-color: #E8F9FD;
+    }
+
+@media screen and (max-width: 1000px) {
+    .title-img {
+        width: 40px;
+    }
+
+    .title-text {
+        font-size: 1.8rem;
+        letter-spacing: 0.05em;
+    }
+
+    .user-email {
+        font-size: 1.3rem;
+    }
+
+    .form-label {
+        margin-top: 20px;
+    }
+}

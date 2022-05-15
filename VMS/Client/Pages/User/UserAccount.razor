@@ -1,0 +1,187 @@
+﻿@page "/user/account"
+@layout UserAuthLayout
+@inject NavigationManager NavManager
+
+<section class="main-body px-3 px-md-5 my-3">
+    <div class="upper-container pt-md-5 d-flex align-items-center">
+        <h1 class="greet-title me-auto">
+            Hello,
+            <span class="change-color">
+                Username
+            </span>
+            <img src="./css/images/verified.png" alt="" class="verify-img">
+        </h1>
+        <button class="qr-btn" @onclick="OnQr">
+            Scan Qr
+            <img src="./css/images/qr-code.png" alt="qr-code" class="qr-img">
+        </button>
+    </div>
+    <div class="lower-container">
+        <div class="overview-box d-md-flex">
+            <p class="overview me-auto">*Overview of your vaccination card</p>
+            <p class="overview">*Only verified user can have a QR code</p>
+        </div>
+        <div class="card-container d-flex justify-content-center mt-3 w-100">
+            <div class="card-box">
+                <div class="card-title-box d-flex align-items-center">
+                    <h3 class="card-title me-auto">Covid-19 Vaccination Card</h3>
+                    <img src="./css/images/card.png" alt="vaccination-card" class="card-img">
+                </div>
+                <div class="personal-box mt-4">
+                    <div class="row">
+                        <div class="col-md p-text">
+                            Last Name:
+                            <span class="black-change-color">Batinga</span>
+                        </div>
+                        <div class="col-md p-text">
+                            First Name:
+                            <span class="black-change-color">Mark Joseph</span>
+                        </div>
+                        <div class="col-md p-text">
+                            Middle Name:
+                            <span class="black-change-color">Quinones</span>
+                        </div>
+                        <div class="col-md-2 p-text">
+                            Suffix:
+                            <span class="black-change-color"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-8 p-text">
+                            Address:
+                            <span class="black-change-color">Brgy, Alusiis, San Narciso, Zambales</span>
+                        </div>
+                        <div class="col-md p-text">
+                            Contact Number:
+                            <span class="black-change-color">09501109163</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md p-text">
+                            Date of Birth:
+                            <span class="black-change-color">June 23, 2001</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="vaccine-box">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Dosage</th>
+                                <th>Date</th>
+                                <th>Manufacturer Name</th>
+                                <th>Batch No.</th>
+                                <th>Lot No.</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td rowspan="2">
+                                    <p class="dose">
+                                        1st Dose
+                                    </p>
+                                </td>
+                                <td>
+                                    <span class="data-span">
+                                        June 23, 2001
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="data-span">
+                                        AstraZenica
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="data-span">
+                                        CTSDN12
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="data-span">
+                                        CTMAV59
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="4">
+                                    <p class="dose">
+                                        Vaccinator Name:
+                                        <span class="data-span">
+                                            S.P. Fantone, MD
+                                        </span>
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td rowspan="2">
+                                    <p class="dose">
+                                        2nd Dose
+                                    </p>
+                                </td>
+                                <td>
+                                    <span class="data-span">
+                                        July 23, 2001
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="data-span">
+                                        AstraZenica
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="data-span">
+                                        CTSD2312
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="data-span">
+                                        CTMAV59
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="4">
+                                    <p class="dose">
+                                        Vaccinator Name:
+                                        <span class="data-span">
+                                            S.P. Fantone, MD
+                                        </span>
+                                    </p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="fac-box">
+                    <div class="d-md-flex">
+                        <div class="f-text me-auto">
+                            Facility Name:
+                            <span class="f-black">RHU- San Narciso</span>
+                        </div>
+                        <div class="f-text">
+                            Contact Number:
+                            <span class="f-black">09501109163</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="verify-container mt-5">
+            <div class="verify-box w-100 d-flex justify-content-end">
+                <h3 class="verify-text">To Verify Your Account. <a @onclick="OnVerify" class="a-verify">Click Here..</a> </h3>
+            </div>
+        </div>
+    </div>
+</section>
+
+@code {
+    private void OnVerify()
+    {
+        NavManager.NavigateTo("user/verification");
+    }
+
+    private void OnQr()
+    {
+        NavManager.NavigateTo("user/qrcode");
+    }
+}

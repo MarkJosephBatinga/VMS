@@ -1,0 +1,78 @@
+﻿@inject NavigationManager NavManager
+
+<section class="admin-nav px-3 px-md-5 d-xl-flex justify-content-center">
+    <nav class="navbar navbar-expand-xl navbar-dark">
+        <div class="container-fluid nav-container">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse d-xl-flex" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="m-3">
+                        <button @onclick="OnDash" class="trans-btn nav-link d-flex align-items-center">
+                            Dashboard
+                        </button>
+                    </li>
+                    <li class="m-3">
+                        <button @onclick="OnUser" class="trans-btn nav-link d-flex align-items-center">
+                            Users
+                        </button>
+                    </li>
+                    <li class="m-3">
+                        <button @onclick="OnVacc" class="trans-btn nav-link d-flex align-items-center">
+                            Vaccinated
+                        </button>
+                    </li>
+                    <li class="m-3">
+                        <button @onclick="OnUnvacc" class="trans-btn nav-link d-flex align-items-center">
+                            Unvaccinated
+                        </button>
+                    </li>
+                    <li class="m-3">
+                        <button @onclick="OnVerify" class="trans-btn nav-link d-flex align-items-center">
+                            Verifications
+                        </button>
+                    </li>
+                    <li class="m-3">
+                        <button @onclick="OnAppoint" class="trans-btn nav-link d-flex align-items-center">
+                            Appointments
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</section>
+
+@code {
+    private void OnDash()
+    {
+        NavManager.NavigateTo("/admin/dashboard");
+    }
+
+    private void OnUser()
+    {
+        NavManager.NavigateTo("/admin/user");
+    }
+
+    private void OnVacc()
+    {
+        NavManager.NavigateTo("/admin/vaccinated");
+    }
+
+    private void OnUnvacc()
+    {
+        NavManager.NavigateTo("/admin/unvaccinated");
+    }
+
+    private void OnAppoint()
+    {
+        NavManager.NavigateTo("/admin/appointment");
+    }
+
+    private void OnVerify()
+    {
+        NavManager.NavigateTo("/admin/verification");
+    }
+}

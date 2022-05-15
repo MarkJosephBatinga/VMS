@@ -1,0 +1,135 @@
+﻿@page "/admin/userform"
+@layout AdminAuthLayout
+@inject NavigationManager NavManager
+
+<section class="admin-body px-3 px-md-5 my-3">
+    <div class="top-container d-md-flex align-items-center px-lg-5">
+        <div class="left-box d-flex align-items-center me-auto">
+            <img src="./css/images/transaction.png" alt="User-logo" class="title-img">
+            <h3 class="title-text">User Information</h3>
+        </div>
+        <div class="right-box mt-3 mt-md-0">
+            <h4 class="user-email">BATINGAMARK@GMAIL.COM</h4>
+        </div>
+    </div>
+    <div class="lower-container mt-5">
+        <div class="form-box">
+            <form action="">
+                <h4 class="group-title">Full Name</h4>
+                <div class="form-group row mb-4">
+                    <div class="col-md">
+                        <p class="form-label">First Name</p>
+                        <input type="text" name="" placeholder="Batinga" class="form-input">
+                    </div>
+                    <div class="col-md">
+                        <p class="form-label">Last Name</p>
+                        <input type="text" name="" placeholder="Mark Joseph" class="form-input">
+                    </div>
+                    <div class="col-md">
+                        <p class="form-label">Middle Name</p>
+                        <input type="text" name="" placeholder="Quinones" class="form-input">
+                    </div>
+                    <div class="col-md">
+                        <p class="form-label">Suffix</p>
+                        <input type="text" name="" placeholder="III" class="form-input">
+                    </div>
+                </div>
+                <h4 class="group-title">Address</h4>
+                <div class="form-group row mb-4">
+                    <div class="col-md">
+                        <p class="form-label">Barangay</p>
+                        <input type="text" name="" placeholder="Alusiis" class="form-input">
+                    </div>
+                    <div class="col-md">
+                        <p class="form-label">Town/City</p>
+                        <input type="text" name="" placeholder="San Narciso" class="form-input">
+                    </div>
+                    <div class="col-md">
+                        <p class="form-label">Province</p>
+                        <input type="text" name="" placeholder="Zambales" class="form-input">
+                    </div>
+                    <div class="col-md">
+                        <p class="form-label">Zip Code</p>
+                        <input type="text" name="" placeholder="2025" class="form-input">
+                    </div>
+                </div>
+                <h4 class="group-title">Contact Number</h4>
+                <div class="form-group row mb-4">
+                    <div class="col-md-4">
+                        <p class="form-label">Email</p>
+                        <input type="text" name="" value="Batingamark@gmail.com" disabled class="form-input">
+                    </div>
+                    <div class="col-md-4">
+                        <p class="form-label">Contact Number</p>
+                        <input type="text" name="" placeholder="09501109163" class="form-input">
+                    </div>
+                </div>
+                <h4 class="group-title">First Dose</h4>
+                <div class="form-group row mb-4">
+                    <div class="col-md-2">
+                        <p class="form-label">Date</p>
+                        <input type="date" name="" class="form-input">
+                    </div>
+                    <div class="col-md">
+                        <p class="form-label">Manufacturer Name</p>
+                        <input type="text" name="" placeholder="Astrazenica" class="form-input">
+                    </div>
+                    <div class="col-md">
+                        <p class="form-label">Vaccinator Name</p>
+                        <input type="text" name="" placeholder="Dr. Strange" class="form-input">
+                    </div>
+                    <div class="col-md-2">
+                        <p class="form-label">Batch No.</p>
+                        <input type="text" name="" placeholder="KLDFN21" class="form-input">
+                    </div>
+                    <div class="col-md-2">
+                        <p class="form-label">Lot No.</p>
+                        <input type="text" name="" placeholder="FDASKO354" class="form-input">
+                    </div>
+                </div>
+                <h4 class="group-title">Second Dose</h4>
+                <div class="form-group row mb-4">
+                    <div class="col-md-2">
+                        <p class="form-label">Date</p>
+                        <input type="date" name="" class="form-input">
+                    </div>
+                    <div class="col-md">
+                        <p class="form-label">Manufacturer Name</p>
+                        <input type="text" name="" placeholder="Astrazenica" class="form-input">
+                    </div>
+                    <div class="col-md">
+                        <p class="form-label">Vaccinator Name</p>
+                        <input type="text" name="" placeholder="Dr. Strange" class="form-input">
+                    </div>
+                    <div class="col-md-2">
+                        <p class="form-label">Batch No.</p>
+                        <input type="text" name="" placeholder="KLDFN21" class="form-input">
+                    </div>
+                    <div class="col-md-2">
+                        <p class="form-label">Lot No.</p>
+                        <input type="text" name="" placeholder="FDASKO354" class="form-input">
+                    </div>
+                </div>
+                <h4 class="group-title">Health Facility</h4>
+                <div class="form-group row mb-4">
+                    <div class="col-md-4">
+                        <p class="form-label">Health Facility Name</p>
+                        <input type="text" name="" placeholder="RHU San Narciso" class="form-input">
+                    </div>
+                    <div class="col-md-4">
+                        <p class="form-label">Contact Number</p>
+                        <input type="text" name="" placeholder="09501109163" class="form-input">
+                    </div>
+                </div>
+                <div class="submit-box d-flex justify-content-end">
+                    <a href="" type="button" class="cancel-btn mx-3">Cancel</a>
+                    <button type="submit" class="submit-btn">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+@code {
+
+}

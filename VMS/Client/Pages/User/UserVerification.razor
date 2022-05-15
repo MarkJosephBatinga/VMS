@@ -1,0 +1,50 @@
+﻿@page "/user/verification"
+@layout UserAuthLayout
+@inject NavigationManager NavManager
+
+<section class="main-body px-3 px-md-5 my-3">
+    <div class="upper-container mt-md-5">
+        <h1 class="main-title">Verify Your <span class="blue-change">Account</span></h1>
+        <p class="subtitle">This is to ensure that the user is truly vaccinated.</p>
+        <p class="subtitle light-blue">Verified account can also use QR code function for travelling to different provinces in the Philippines</p>
+    </div>
+    <div class="lower-container row">
+        <div class="col-md d-flex justify-content-center">
+            <div class="verify-box">
+                <form action="">
+                    <div class="vacc-card">
+                        <h3 class="card-title">Vaccination Card</h3>
+                        <img src="./css/images/vacc-card.png" alt="Vaccination Card" class="card-img">
+                        <br>
+                        <input type="file" name="" id="" class="file-input">
+                        <p class="card-hint">Provide a clear image of your vaccination card</p>
+                    </div>
+                    <div class="id-card mt-5">
+                        <h3 class="card-title">Valid Id/Government Id</h3>
+                        <img src="./css/images/valid-id.png" alt="Valid ID Card" class="card-img">
+                        <br>
+                        <input type="file" name="" id="" class="file-input">
+                        <p class="card-hint">Provide a clear image of the Id, both front and back</p>
+                    </div>
+                    <div class="submit-box d-flex justify-content-end mt-5">
+                        <button type="submit" class="trans-btn">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-md">
+            <div class="img-box">
+                <img src="./css/images/okay-lady.png" alt="Okay Lady" class="verify-img">
+            </div>
+        </div>
+    </div>
+</section>
+
+
+@code {
+
+    private void OnVaccine()
+    {
+        NavManager.NavigateTo("/user/vaccination");
+    }
+}

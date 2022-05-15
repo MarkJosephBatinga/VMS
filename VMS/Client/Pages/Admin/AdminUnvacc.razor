@@ -1,0 +1,56 @@
+﻿@page "/admin/unvaccinated"
+@layout AdminAuthLayout
+@inject NavigationManager NavManager
+
+<section class="admin-body px-3 px-md-5 my-3">
+    <div class="top-container d-flex align-items-center px-lg-5">
+        <div class="left-box d-flex align-items-center me-auto">
+            <img src="./css/images/unvaccinated.png" alt="User-logo" class="title-img">
+            <h3 class="title-text">Unvaccinated</h3>
+        </div>
+        <div class="right-box">
+            <form action="" class="d-flex align-items-center">
+                <input type="text" name="search-box" class="search-input mx-1">
+                <button type="submit" class="submit-btn">
+                    <img src="./css/images/search-btn.png" alt="Search" class="search-btn">
+                </button>
+            </form>
+        </div>
+    </div>
+    <div class="lower-container">
+        <div class="table-box">
+            <table class="styled-table">
+                <thead>
+                    <tr>
+                        <th>Last Name</th>
+                        <th>First Name</th>
+                        <th>Email</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Batinga</td>
+                        <td>Mark Joseph</td>
+                        <td>batingamark@gmail.com</td>
+                        <td>
+                            <button type="button" class="trans-btn">Delete</button>
+                        </td>
+                    </tr>
+                    <tr class="active-row">
+                        <td>Viste</td>
+                        <td>Charisse</td>
+                        <td>CatLictaoa@gmail.com</td>
+                        <td>
+                            <button type="button" class="trans-btn">Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+@code {
+
+}

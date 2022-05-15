@@ -1,0 +1,26 @@
+﻿@page "/user/qrcode"
+@layout UserAuthLayout
+@inject NavigationManager NavManager
+
+<section class="main-body px-3 px-md-5 my-3">
+    <div class="lower-container row">
+        <div class="col-md img-box">
+            <h3 class="title">VMS QR Code</h3>
+            <p class="subtitle">You can use this for travelling and helps identify vaccinated person</p>
+            <img src="./css/images/man-w-qr.png" alt="man with qr code" class="qr-img">
+        </div>
+        <div class="col-md d-flex justify-content-center">
+            <div class="qr-box d-flex flex-column justify-content-center align-items-center">
+                <h3 class="qr-title">Batinga, Mark Joseph <span class="change-color">QR Code</span></h3>
+                <img src="./css/images/real-qr.png" alt="real qr code" class="real-qr-img">
+            </div>
+        </div>
+    </div>
+</section>
+
+@code {
+    private void OnVerify()
+    {
+        NavManager.NavigateTo("user/verification");
+    }
+}

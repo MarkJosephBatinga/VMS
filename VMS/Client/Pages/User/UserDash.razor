@@ -1,0 +1,62 @@
+﻿@page "/user/dashboard"
+@layout UserAuthLayout
+@inject NavigationManager NavManager
+
+<section class="px-3 px-md-5 my-3">
+    <div class="top-container row py-3">
+        <div class="left-box col-8 d-flex align-items-center">
+            <img src="./css/images/ppe.png" alt="Nurse in PPE" class="ppe-img d-none d-md-block">
+            <h3 class="top-title">
+                Mass immunization can help save lives.
+                If you're not sure whether to get your shot now, <span class="change-color">get the facts!</span>
+            </h3>
+        </div>
+        <div class="right-box col-4 d-flex align-items-center justify-content-end">
+            <button class="get-btn" @onclick="OnVaccine">Get Vaccine</button>
+        </div>
+    </div>
+</section>
+<section class="bottom-container px-3 px-md-5 d-flex flex-column align-items-center">
+    <div class="upper-box">
+        <div class="total-box d-flex">
+            <img src="./css/images/total-case.png" alt="Analyzing Cases" class="analytic-img">
+            <div class="total-content d-flex flex-column justify-content-between w-100">
+                <h3 class="total-title text-start">
+                    Total number of Covid Cases:
+                </h3>
+                <h1 class="total-number text-center">
+                    1,000,000
+                </h1>
+                <p class="end-text text-end">in the Philippines</p>
+            </div>
+        </div>
+    </div>
+    <div class="lower-box m-3 row">
+        <div class="analytic-box col-md d-flex flex-column align-items-center mx-md-5 m-3">
+            <img src="./css/images/recovery.png" alt="Recoveries" class="a-img">
+            <h3 class="analytic-title">Recoveries</h3>
+            <h2 class="analytic-number">100,000</h2>
+            <p class="end-text">as of May 9, 2022</p>
+        </div>
+        <div class="analytic-box col-md d-flex flex-column align-items-center mx-md-5 m-3">
+            <img src="./css/images/death.png" alt="Recoveries" class="a-img">
+            <h3 class="analytic-title">Fatalities</h3>
+            <h2 class="analytic-number">100,000</h2>
+            <p class="end-text">as of May 9, 2022</p>
+        </div>
+        <div class="analytic-box col-md d-flex flex-column align-items-center mx-md-5 m-3">
+            <img src="./css/images/active.png" alt="Recoveries" class="a-img">
+            <h3 class="analytic-title">Active Cases</h3>
+            <h2 class="analytic-number">100,000</h2>
+            <p class="end-text">as of May 9, 2022</p>
+        </div>
+    </div>
+</section>
+
+@code {
+
+    private void OnVaccine()
+    {
+        NavManager.NavigateTo("/user/vaccination");
+    }
+}

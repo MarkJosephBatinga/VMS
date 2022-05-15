@@ -1,0 +1,147 @@
+﻿.top-container {
+    width: 100%;
+}
+
+.ppe-img {
+    width: 10%;
+}
+
+.top-title {
+    font-family: 'Source Sans Pro';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 2.3rem;
+    color: #0AA1DD;
+}
+
+.change-color {
+    font-family: 'Source Sans Pro';
+    color: #2155CD;
+}
+
+.get-btn {
+    background: #0AA1DD;
+    border-radius: 20px;
+    border: none;
+    font-family: 'Source Sans Pro';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 2rem;
+    color: #E8F9FD;
+    padding: 5px 30px;
+}
+
+.bottom-container {
+    width: 100%;
+    background-color: #79DAE8;
+}
+
+.total-box {
+    margin: 50px;
+}
+
+.analytic-img {
+    width: 300px;
+}
+
+.total-box {
+    width: 100%;
+    padding: 20px;
+    background: #0AA1DD;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+}
+
+.total-title {
+    font-family: 'Source Sans Pro';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 2rem;
+    color: #E8F9FD;
+}
+
+.total-number {
+    font-family: 'Source Sans Pro';
+    font-style: normal;
+    font-weight: 900;
+    font-size: 5rem;
+    letter-spacing: 5px;
+    color: #2155CD;
+}
+
+.end-text {
+    font-family: 'Source Sans Pro';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 1rem;
+    color: #E8F9FD;
+}
+
+.analytic-box {
+    background: #0AA1DD;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+}
+
+.a-img {
+    width: 300px;
+}
+
+.analytic-title {
+    font-family: 'Source Sans Pro';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 1.8rem;
+    color: #E8F9FD;
+}
+
+.analytic-number {
+    font-family: 'Source Sans Pro';
+    font-style: normal;
+    font-weight: 900;
+    font-size: 36px;
+    line-height: 45px;
+    letter-spacing: 5px;
+    color: #2155CD;
+}
+
+@media screen and (max-width: 1000px) {
+    .top-title {
+        font-size: 1rem;
+    }
+
+    .get-btn {
+        font-size: 1rem;
+        padding: 5px 20px;
+    }
+
+    .total-box {
+        margin: 20px 0px;
+    }
+
+
+    .analytic-img {
+        width: 100px;
+    }
+
+    .total-title {
+        font-size: 1rem;
+        color: #E8F9FD;
+    }
+
+    .total-number {
+        font-size: 2.5rem;
+    }
+
+    .end-text {
+        font-size: .5rem;
+    }
+
+    .lower-box {
+        margin: 0;
+    }
+
+    .a-img {
+        width: 100px;
+    }
+}

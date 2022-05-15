@@ -1,0 +1,211 @@
+﻿.verify-img {
+    width: 80px;
+}
+
+.qr-img {
+    width: 50px;
+}
+
+.greet-title {
+    font-family: 'Playfair Display';
+    font-style: normal;
+    font-weight: 900;
+    font-size: 3.8rem;
+    letter-spacing: 3px;
+    color: #0AA1DD;
+}
+
+.change-color {
+    color: #2155CD;
+}
+
+.qr-btn {
+    background: #0AA1DD;
+    box-shadow: 0px 4px 4px #000000;
+    border-radius: 20px;
+    border: none;
+    padding: 5px 30px;
+    font-family: 'Source Sans Pro';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: #E8F9FD;
+}
+
+.overview {
+    font-family: 'Source Sans Pro';
+    font-style: italic;
+    font-weight: 600;
+    font-size: 1.2rem;
+    color: #2155CD;
+}
+
+.card-box {
+    width: 80%;
+    background: #79DAE8;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.card-title {
+    font-family: 'Source Sans Pro';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 1.6rem;
+    line-height: 40px;
+    color: #2155CD;
+}
+
+.card-img {
+    width: 50px;
+}
+
+.p-text {
+    font-family: 'Source Sans Pro';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: #2155CD;
+    margin-top: 10px;
+}
+
+.black-change-color {
+    font-family: 'Source Sans Pro';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: #000000;
+}
+
+.vaccine-box {
+    margin: 30px;
+}
+
+table {
+    width: 100%;
+    border: 3px solid #2155CD;
+    margin: 10px 0px;
+}
+
+thead {
+    background: #2155CD;
+    text-align: center;
+}
+
+th {
+    font-family: 'Source Sans Pro';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 1.2rem;
+    line-height: 25px;
+    color: #E8F9FD;
+    padding: 10px 0px;
+}
+
+td {
+    background: #E8F9FD;
+    border: 3px solid #2155CD;
+    text-align: center;
+    padding: 10px;
+}
+
+.dose {
+    margin: 0;
+    font-family: 'Source Sans Pro';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 1.4rem;
+    line-height: 30px;
+    color: #2155CD;
+}
+
+.data-span {
+    font-family: 'Source Sans Pro';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 1.4rem;
+    color: #000000;
+}
+
+.f-text {
+    font-family: 'Source Sans Pro';
+    font-style: normal;
+    font-weight: 700;
+    font-size: .9rem;
+    color: #2155CD;
+}
+
+.f-black {
+    font-family: 'Source Sans Pro';
+    font-style: normal;
+    font-weight: 700;
+    font-size: .9rem;
+    color: #000000;
+}
+
+.verify-text {
+    font-family: 'Source Sans Pro';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 1.7rem;
+    color: #2155CD;
+    margin: 0px;
+}
+
+.a-verify {
+    cursor: pointer;
+    text-decoration: none;
+    font-family: 'Source Sans Pro';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 1.7rem;
+    color: #79DAE8;
+    margin: 0px;
+}
+
+@media screen and (max-width: 1000px) {
+    .verify-img {
+        width: 50px;
+    }
+
+    .qr-img {
+        width: 30px;
+    }
+
+    .greet-title {
+        font-size: 1.5rem;
+        letter-spacing: 1px;
+    }
+
+    .overview {
+        font-size: .8rem;
+    }
+
+    .card-box {
+        width: 100%;
+    }
+
+    .vaccine-box {
+        margin: 0px;
+    }
+
+    th {
+        font-size: .9rem;
+    }
+
+    .dose {
+        font-size: 1rem;
+    }
+
+    .data-span {
+        font-size: .9rem;
+    }
+
+    .verify-text {
+        font-size: 1.3rem;
+    }
+
+    .a-verify {
+        font-size: 1.3rem;
+    }
+}

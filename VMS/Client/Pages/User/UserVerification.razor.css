@@ -1,0 +1,118 @@
+﻿.main-title {
+    font-family: 'Source Sans Pro';
+    font-style: normal;
+    font-weight: 900;
+    font-size: 4rem;
+    line-height: 80px;
+    color: #79DAE8;
+}
+
+.subtitle {
+    font-family: 'Source Sans Pro';
+    font-style: italic;
+    font-weight: 400;
+    font-size: 1.2rem;
+    color: #2155CD;
+    text-indent: 30px;
+    margin: 10px;
+}
+
+.blue-change {
+    font-family: 'Source Sans Pro';
+    color: #2155CD;
+}
+
+.light-blue {
+    color: #0AA1DD;
+}
+
+.verify-box {
+    width: 80%;
+    background: #2155CD;
+    box-shadow: 4px 4px 4px #000000;
+    border-radius: 20px;
+    padding: 40px;
+}
+
+.card-title {
+    font-family: 'Source Sans Pro';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 2.3rem;
+    line-height: 30px;
+    color: #E8F9FD;
+}
+
+.file-input {
+    font-family: 'Source Sans Pro';
+    background: #E8F9FD;
+    box-shadow: 0px 4px 4px #2155CD;
+    border-radius: 10px;
+    margin-top: 30px;
+    color: #2155CD;
+}
+
+.card-hint {
+    font-family: 'Source Sans Pro';
+    font-style: italic;
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 20px;
+    color: #E8F9FD;
+    text-indent: 30px;
+}
+
+.card-img {
+    width: 150px;
+}
+
+.trans-btn {
+    border: 3px solid #E8F9FD;
+    border-radius: 10px;
+    background-color: transparent;
+    padding: 5px 10%;
+    font-family: 'Source Sans Pro';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 1.5rem;
+    text-align: center;
+    color: #E8F9FD;
+}
+
+    .trans-btn:hover {
+        background-color: #E8F9FD;
+        color: #2155CD;
+    }
+
+
+.img-box {
+    width: 100%;
+}
+
+.verify-img {
+    width: 80%;
+}
+
+@media screen and (max-width: 1000px) {
+    .main-title {
+        font-size: 2.3rem;
+    }
+
+    .subtitle {
+        font-size: .9rem;
+        text-indent: 0px;
+    }
+
+    .verify-box {
+        width: 100%;
+        padding: 40px;
+    }
+
+    .card-title {
+        font-size: 1.8rem;
+    }
+
+    .card-hint {
+        font-size: .8rem;
+    }
+}

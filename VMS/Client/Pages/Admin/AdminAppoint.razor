@@ -1,0 +1,64 @@
+﻿@page "/admin/appointment"
+@layout AdminAuthLayout
+@inject NavigationManager NavManager
+
+<section class="admin-body px-3 px-md-5 my-3">
+    <div class="top-container d-flex align-items-center px-lg-5">
+        <div class="left-box d-flex align-items-center me-auto">
+            <img src="./css/images/appointment.png" alt="User-logo" class="title-img">
+            <h3 class="title-text">Appointments</h3>
+        </div>
+        <div class="right-box">
+            <form action="" class="d-flex align-items-center">
+                <input type="text" name="search-box" class="search-input mx-1">
+                <button type="submit" class="submit-btn">
+                    <img src="./css/images/search-btn.png" alt="Search" class="search-btn">
+                </button>
+            </form>
+        </div>
+    </div>
+    <div class="lower-container">
+        <div class="table-box">
+            <table class="styled-table">
+                <thead>
+                    <tr>
+                        <th>Full Name</th>
+                        <th>Contact Number</th>
+                        <th>Address</th>
+                        <th>Age</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Batinga, Mark Joseph</td>
+                        <td>09501109163</td>
+                        <td>San Narciso, Zambales</td>
+                        <td>20</td>
+                        <td>
+                            <button type="button" class="trans-btn" @onclick="OnUpdate">Update</button>
+                            <button type="button" class="trans-btn">Delete</button>
+                        </td>
+                    </tr>
+                    <tr class="active-row">
+                        <td>Viste, Charisse</td>
+                        <td>09501109163</td>
+                        <td>San Narciso, Zambales</td>
+                        <td>21</td>
+                        <td>
+                            <button type="button" class="trans-btn">Update</button>
+                            <button type="button" class="trans-btn">Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+@code {
+    private void OnUpdate()
+    {
+        NavManager.NavigateTo("admin/appointform");
+    }
+}

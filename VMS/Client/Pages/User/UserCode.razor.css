@@ -1,0 +1,71 @@
+﻿.title {
+    font-family: 'Source Sans Pro';
+    font-style: normal;
+    font-weight: 900;
+    font-size: 4rem;
+    letter-spacing: 5px;
+    margin: 0px;
+    color: #2155CD;
+}
+
+.subtitle {
+    font-family: 'Source Sans Pro';
+    font-style: italic;
+    font-weight: 400;
+    font-size: 1.3rem;
+    color: #2155CD;
+}
+
+.qr-box {
+    padding: 20px;
+    width: 80%;
+    background: #79DAE8;
+    box-shadow: 4px 4px 4px #000000;
+    border-radius: 20px;
+}
+
+.qr-title {
+    font-family: 'Source Sans Pro';
+    font-style: normal;
+    font-weight: 900;
+    font-size: 2.5rem;
+    margin-bottom: 100px;
+    color: #0AA1DD;
+}
+
+.change-color {
+    font-family: 'Source Sans Pro';
+    color: #E8F9FD;
+}
+
+.qr-img {
+    width: 80%;
+}
+
+.real-qr-img {
+    width: 50%;
+}
+
+@media screen and (max-width: 1000px) {
+    .title {
+        font-size: 2rem;
+        letter-spacing: 2px;
+    }
+
+    .subtitle {
+        font-size: .9rem;
+    }
+
+    .qr-title {
+        font-size: 1rem;
+        margin-bottom: 20px;
+    }
+
+    .qr-box {
+        padding: 50px;
+    }
+
+    .real-qr-img {
+        width: 70%;
+    }
+}

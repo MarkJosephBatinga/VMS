@@ -1,0 +1,27 @@
+﻿.navbar-toggler-icon {
+    color: #E8F9FD;
+}
+
+.trans-btn {
+    border: 3px solid #E8F9FD;
+    border-radius: 10px;
+    background-color: transparent;
+    padding: 5px 30px;
+    font-family: 'Source Sans Pro';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 1.5rem;
+    text-align: center;
+    color: #E8F9FD;
+}
+
+    .trans-btn:hover {
+        background-color: #2155CD;
+        border: 3px solid #2155CD;
+    }
+
+@media screen and (max-width: 1000px) {
+    .trans-btn {
+        border: none;
+    }
+}
