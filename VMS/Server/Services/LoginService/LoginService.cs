@@ -1,0 +1,41 @@
+﻿using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using VMS.Server.Data;
+using VMS.Shared;
+
+namespace VMS.Server.Services.LoginService
+{
+    public class LoginService : ILoginService
+    {
+        private readonly DataContext _data;
+
+        public LoginService(DataContext data)
+        {
+            _data = data;
+        }
+
+        User user = new User();
+
+        public async Task<User> GetUser(string email)
+        {
+            return user = await _data.user_info.Where(u => u.email == email).FirstOrDefaultAsync();
+        }
+
+        public async Task<User> LoginUser(LoginToken LoginUser)
+        {
+            user = await _data.user_info.Where(u => u.email == LoginUser.email
+            && u.password == LoginUser.password).FirstOrDefaultAsync();
+            if (user == null)
+            {
+                return user = new User();
+            }
+            else
+            {
+                return user;
+            }
+        }
+    }
+}

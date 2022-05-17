@@ -1,10 +1,19 @@
-﻿@inject NavigationManager NavManager
+﻿@inject ILocalStorageService LocalStorage
+@inject AuthenticationStateProvider Authentication
+@inject NavigationManager Navigate
 
 <nav class="main-nav d-flex align-items-center px-3 px-md-5 py-3">
     <a href="/user/dashboard" class="nav-logo me-auto">VMS</a>
     <a href="/user/account" class="me-2"><img src="./css/images/man.png" class="account-img" alt="account"></a>
-    <a href="" class="me-2"><img src="./css/images/logout.png" class="account-img" alt="account"></a>
+    <a @onclick="Logout" class="me-2"><img src="./css/images/logout.png" class="account-img" alt="account"></a>
 </nav>
 
 @code {
+    private async void Logout()
+    {
+        await LocalStorage.RemoveItemAsync("username");
+        await LocalStorage.RemoveItemAsync("role");
+        await Authentication.GetAuthenticationStateAsync();
+        Navigate.NavigateTo("");
+    }
 }

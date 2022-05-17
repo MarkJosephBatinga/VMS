@@ -1,4 +1,5 @@
 ﻿@page "/user/dashboard"
+@attribute [Authorize(Roles = "user")]
 @layout UserAuthLayout
 @inject NavigationManager NavManager
 

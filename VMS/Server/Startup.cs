@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Linq;
 using VMS.Server.Data;
+using VMS.Server.Services.LoginService;
 using VMS.Server.Services.UserService;
 
 namespace VMS.Server
@@ -34,6 +35,7 @@ namespace VMS.Server
             services.AddControllersWithViews();
             services.AddRazorPages();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<ILoginService, LoginService>();
             services.AddAuthentication(options => {
                 options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
             });

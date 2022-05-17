@@ -1,6 +1,9 @@
 ﻿@page "/user/login"
 @inject NavigationManager NavManager
 @inject IUserService UserService
+@inject ILoginService LoginService
+@inject ILocalStorageService LocalStorage
+@inject AuthenticationStateProvider AuthProvider
 @inject IToastService Toast
 @inject IJSRuntime JsRun
 
@@ -13,17 +16,21 @@
         <div class=" col-xl d-flex justify-content-center">
             @if (!isSign)
             {
-                <div class="form-box d-flex flex-column align-items-center">
-                    <form action="" class="form-wrap">
+                <div class="form-box d-flex flex-column">
+                    <EditForm Model="login" OnValidSubmit="OnLogin">
+                        <DataAnnotationsValidator></DataAnnotationsValidator>
                         <h3 class="form-title">Login</h3>
+
                         <p class="form-label">EMAIL</p>
-                        <input class="form-input" type="email" name="email" placeholder="email">
+                        <ValidationMessage For="() => login.email" />
+                        <input class="form-input w-100" type="email" name="email" @bind-value="login.email" placeholder="email">
                         <p class="form-label">PASSWORD</p>
-                        <input class="form-input" type="password" name="password" placeholder="password">
+                        <ValidationMessage For="() => login.password" />
+                        <input class="form-input" type="password" name="password" @bind-value="login.password" placeholder="password">
                         <div class="submit-box d-flex justify-content-center">
                             <button type="submit" class="trans-btn">Login</button>
                         </div>
-                    </form>
+                    </EditForm>
                     <div class="signup-box d-flex align-items-center justify-content-between px-md-5">
                         <p class="signup-label">Don't have an account? <a @onclick="SwitchPage" class="signup-ref">Click here</a></p>
                         <img src="./css/images/vacc-img.png" alt="Vaccinne-image" class="signup-img">
@@ -35,27 +42,27 @@
                 <div class="form-box d-flex flex-column">
                     <EditForm Model="user" OnValidSubmit="OnSignUp">
                         <DataAnnotationsValidator></DataAnnotationsValidator>
-                            <h3 class="form-title">Sign Up</h3>
+                        <h3 class="form-title">Sign Up</h3>
 
-                            <p class="form-label">First Name</p>
-                            <ValidationMessage For="() => user.FirstName" />
-                            <input class="form-input w-100" type="text" name="first_name" @bind-value="user.FirstName" placeholder="first name">
+                        <p class="form-label">First Name</p>
+                        <ValidationMessage For="() => user.FirstName" />
+                        <input class="form-input w-100" type="text" name="first_name" @bind-value="user.FirstName" placeholder="first name">
 
-                            <p class="form-label">Last Name</p>
-                            <ValidationMessage For="() => user.LastName" />
-                            <input class="form-input" type="text" name="last_name" @bind-value="user.LastName" placeholder="last name">
+                        <p class="form-label">Last Name</p>
+                        <ValidationMessage For="() => user.LastName" />
+                        <input class="form-input" type="text" name="last_name" @bind-value="user.LastName" placeholder="last name">
 
-                            <p class="form-label">EMAIL</p>
-                            <ValidationMessage For="() => user.email" />
-                            <input class="form-input" type="email" name="email" @bind-value="user.email" placeholder="email">
+                        <p class="form-label">EMAIL</p>
+                        <ValidationMessage For="() => user.email" />
+                        <input class="form-input" type="email" name="email" @bind-value="user.email" placeholder="email">
 
-                            <p class="form-label">PASSWORD</p>
-                            <ValidationMessage For="() => user.password" />
-                            <input class="form-input" type="password" name="password" @bind-value="user.password" placeholder="password">
+                        <p class="form-label">PASSWORD</p>
+                        <ValidationMessage For="() => user.password" />
+                        <input class="form-input" type="password" name="password" @bind-value="user.password" placeholder="password">
 
-                            <div class="submit-box d-flex justify-content-center">
-                                <button type="submit" class="trans-btn">Sign Up</button>
-                            </div>
+                        <div class="submit-box d-flex justify-content-center">
+                            <button type="submit" class="trans-btn">Sign Up</button>
+                        </div>
                     </EditForm>
                     <div class="signup-box d-flex align-items-center justify-content-between px-md-5">
                         <p class="signup-label">Already have an account? <a @onclick="SwitchPage" class="signup-ref">Click here</a></p>
@@ -71,6 +78,7 @@
 @code {
     bool isSign = false;
     User user = new User();
+    LoginToken login = new LoginToken();
 
     private void SwitchPage()
     {
@@ -83,6 +91,23 @@
         if (result != null)
         {
             Toast.ShowSuccess("Successfully Registered", "Success");
+        }
+    }
+
+    private async Task OnLogin()
+    {
+        login.role = "user";
+        var result = await LoginService.LoginUser(login);
+        if (result.Id != 0)
+        {
+            await LocalStorage.SetItemAsStringAsync("username", login.email);
+            await LocalStorage.SetItemAsStringAsync("role", login.role);
+            await AuthProvider.GetAuthenticationStateAsync();
+            NavManager.NavigateTo("/user/dashboard");
+        }
+        else
+        {
+            Toast.ShowError("Please Check your email and password", "Login Failed");
         }
     }
 }
