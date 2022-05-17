@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using VMS.Client.Services.UserService;
 
 namespace VMS.Client
 {
@@ -26,6 +27,7 @@ namespace VMS.Client
             builder.Services.AddOptions();
             builder.Services.AddAuthorizationCore();
             builder.Services.AddBlazoredToast();
+            builder.Services.AddScoped<IUserService, UserService>();
             builder.Services.AddScoped<AuthenticationStateProvider, AuthStateProvider>();
 
             await builder.Build().RunAsync();

@@ -1,5 +1,7 @@
 ﻿@page "/user/login"
 @inject NavigationManager NavManager
+@inject IUserService UserService
+@inject IToastService Toast
 @inject IJSRuntime JsRun
 
 <section class="main-body px-3 px-md-5 my-3 d-flex align-items-center">
@@ -77,6 +79,10 @@
 
     private async Task OnSignUp()
     {
-        await JsRun.InvokeVoidAsync("console.log", user);
+        var result = await UserService.AddUser(user);
+        if (result != null)
+        {
+            Toast.ShowSuccess("Successfully Registered", "Success");
+        }
     }
 }
