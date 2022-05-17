@@ -1,5 +1,4 @@
-﻿@page "/admin/userform{UserId:int}"
-@page "/admin/userform{VaccineId:int}"
+﻿@page "/admin/userform/add/{Id:int}"
 @attribute [Authorize(Roles = "admin")]
 @layout AdminAuthLayout
 @inject NavigationManager NavManager
@@ -14,7 +13,7 @@
             <h3 class="title-text">User Information</h3>
         </div>
         <div class="right-box mt-3 mt-md-0">
-            <h4 class="user-email">@email.ToUpper()</h4>
+            <h4 class="user-email">@user.email.ToUpper()</h4>
         </div>
     </div>
     <div class="lower-container mt-5">
@@ -146,57 +145,32 @@
 
 @code {
     [Parameter]
-    public int? UserId { get; set; }
-    [Parameter]
-    public int? VaccineId { get; set; }
+    public int? Id { get; set; }
 
     Vaccine vaccine = new Vaccine();
-    string email;
+    User user = new User();
 
     protected async override Task OnInitializedAsync()
     {
-        if (UserId.HasValue)
+        if (Id.HasValue)
         {
-            var result = await UserService.GetUser(UserId.Value);
-            if (result != null)
+            user = await UserService.GetUser(Id.Value);
+            if (user != null)
             {
-                vaccine.UserId = result.Id;
-                vaccine.FirstName = result.FirstName;
-                vaccine.LastName = result.LastName;
-                email = result.email;
-            }
-        }else if(VaccineId.HasValue)
-        {
-            var result = await VaccineService.GetVaccine(VaccineId.Value);
-            if(result != null)
-            {
-                vaccine = result;
+                vaccine.UserId = user.Id;
+                vaccine.FirstName = user.FirstName;
+                vaccine.LastName = user.LastName;
             }
         }
     }
 
     private async Task OnSubmitVaccine()
     {
-        if (UserId.HasValue)
+        var result = await VaccineService.AddVaccine(vaccine);
+        if (result != null)
         {
-            var result = await VaccineService.AddVaccine(vaccine);
-            if (result != null)
-            {
-                Toast.ShowSuccess("User Successfully Verified", "Success");
-                NavManager.NavigateTo("/admin/vaccinated");
-            }
+            Toast.ShowSuccess("User Successfully Verified", "Success");
+            NavManager.NavigateTo("/admin/vaccinated");
         }
-        else if (VaccineId.HasValue)
-        {
-            var result = await VaccineService.UpdateVaccine(vaccine);
-            if (result != null)
-            {
-                Toast.ShowSuccess("Vaccine Card Successfully Updated", "Success");
-                NavManager.NavigateTo("/admin/vaccinated");
-            }
-        }
-
-
-
     }
 }
