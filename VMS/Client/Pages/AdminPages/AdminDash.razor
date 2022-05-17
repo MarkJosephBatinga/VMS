@@ -1,10 +1,13 @@
 ﻿@page "/admin/dashboard"
+@attribute [Authorize(Roles = "admin")]
 @layout AdminAuthLayout
 @inject NavigationManager NavManager
+@inject ILoginService LoginService
+@inject ILocalStorageService LocalStorage
 
 <section class="admin-body px-3 px-md-5 my-3">
     <div class="top-container">
-        <h1 class="title">Welcome, <span>Admin</span></h1>
+        <h1 class="title">Welcome, <span>@admin.FirstName</span></h1>
     </div>
     <div class="lower-container row">
         <div class="left-box col-md d-flex justify-content-center">
@@ -45,4 +48,15 @@
 </section>
 
 @code {
+    Admin admin = new Admin();
+
+    protected async override Task OnInitializedAsync()
+    {
+        var username = await LocalStorage.GetItemAsStringAsync("username");
+        var result = await LoginService.GetAdmin(username);
+        if(result != null)
+        {
+            admin = result;
+        }
+    }
 }

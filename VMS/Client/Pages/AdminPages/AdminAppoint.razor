@@ -1,4 +1,5 @@
 ﻿@page "/admin/appointment"
+@attribute [Authorize(Roles = "admin")]
 @layout AdminAuthLayout
 @inject NavigationManager NavManager
 

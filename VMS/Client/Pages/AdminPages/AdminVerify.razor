@@ -1,4 +1,5 @@
 ﻿@page "/admin/verification"
+@attribute [Authorize(Roles = "admin")]
 @layout AdminAuthLayout
 @inject NavigationManager NavManager
 

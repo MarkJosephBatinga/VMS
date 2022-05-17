@@ -15,5 +15,6 @@ namespace VMS.Server.Data
         }
 
         public DbSet<User> user_info { get; set; }
+        public DbSet<Admin> admin_info { get; set; }
     }
 }

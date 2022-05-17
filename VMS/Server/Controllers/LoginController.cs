@@ -21,6 +21,7 @@ namespace VMS.Server.Controllers
         }
 
         User user = new User();
+        Admin admin = new Admin();
 
         [HttpPost("user")]
         public async Task<ActionResult<User>> LoginAsUser(LoginToken LoginUser)
@@ -32,6 +33,18 @@ namespace VMS.Server.Controllers
         public async Task<ActionResult<User>> GetUser(string email)
         {
             return user = await _service.GetUser(email);
+        }
+
+        [HttpPost("admin")]
+        public async Task<ActionResult<Admin>> LoginAsAdmin(LoginToken LoginUser)
+        {
+            return admin = await _service.LoginAdmin(LoginUser);
+        }
+
+        [HttpGet("admin/{email}")]
+        public async Task<ActionResult<Admin>> GetAdmin(string email)
+        {
+            return admin = await _service.GetAdmin(email);
         }
     }
 }

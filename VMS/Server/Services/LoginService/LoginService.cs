@@ -18,7 +18,7 @@ namespace VMS.Server.Services.LoginService
         }
 
         User user = new User();
-
+        Admin admin = new Admin();
         public async Task<User> GetUser(string email)
         {
             return user = await _data.user_info.Where(u => u.email == email).FirstOrDefaultAsync();
@@ -36,6 +36,25 @@ namespace VMS.Server.Services.LoginService
             {
                 return user;
             }
+        }
+
+        public async Task<Admin> LoginAdmin(LoginToken LoginUser)
+        {
+            admin = await _data.admin_info.Where(a => a.email == LoginUser.email
+            && a.password == LoginUser.password).FirstOrDefaultAsync();
+            if (admin == null)
+            {
+                return admin = new Admin();
+            }
+            else
+            {
+                return admin;
+            }
+        }
+
+        public async Task<Admin> GetAdmin(string email)
+        {
+            return admin = await _data.admin_info.Where(a => a.email == email).FirstOrDefaultAsync();
         }
     }
 }

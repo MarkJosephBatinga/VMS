@@ -11,5 +11,9 @@ namespace VMS.Client.Services.LoginService
         Task<User> GetUser(string email);
 
         Task<User> LoginUser(LoginToken LoginUser);
+
+        Task<Admin> GetAdmin(string email);
+
+        Task<Admin> LoginAdmin(LoginToken LoginAdmin);
     }
 }

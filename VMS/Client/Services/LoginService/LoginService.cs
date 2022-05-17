@@ -16,15 +16,29 @@ namespace VMS.Client.Services.LoginService
         {
             _http = http;
         }
+
+        public async Task<Admin> GetAdmin(string email)
+        {
+            var result = await _http.GetFromJsonAsync<Admin>($"api/login/admin/{email}");
+            return result;
+        }
+
         public async Task<User> GetUser(string email)
         {
             var result = await _http.GetFromJsonAsync<User>($"api/login/user/{email}");
             return result;
         }
 
+        public async Task<Admin> LoginAdmin(LoginToken LoginAdmin)
+        {
+            var result = await _http.PostAsJsonAsync("api/login/admin", LoginAdmin);
+            var status = await result.Content.ReadFromJsonAsync<Admin>();
+            return status;
+        }
+
         public async Task<User> LoginUser(LoginToken LoginUser)
         {
-            var result = await _http.PostAsJsonAsync("api/login/user", LoginUser);
+            var result = await _http.PostAsJsonAsync("api/login/admin", LoginUser);
             var status = await result.Content.ReadFromJsonAsync<User>();
             return status;
         }
