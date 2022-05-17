@@ -10,6 +10,7 @@ namespace VMS.Shared
     public class Vaccine
     {
         public int Id { get; set; }
+        public int UserId { get; set; }
         //Last Name
         [Required(ErrorMessage = "Last Name is Required")]
         public string LastName { get; set; }
@@ -51,7 +52,7 @@ namespace VMS.Shared
         //FLot
         public string FirstLot { get; set; }
         //SDate
-        public string SecondDate { get; set; }
+        public DateTime SecondDate { get; set; }
         //SManufacturer
         public string SecondManufacturer { get; set; }
         //SVacccinator

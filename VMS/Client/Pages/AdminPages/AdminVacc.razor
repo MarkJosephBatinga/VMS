@@ -2,6 +2,7 @@
 @attribute [Authorize(Roles = "admin")]
 @layout AdminAuthLayout
 @inject NavigationManager NavManager
+@inject IVaccineService VaccineService
 
 <section class="admin-body px-3 px-md-5 my-3">
     <div class="top-container d-flex align-items-center px-lg-5">
@@ -26,35 +27,26 @@
                         <th>Full Name</th>
                         <th>Manufacturer Name</th>
                         <th>Address</th>
-                        <th>Dose</th>
+                        <th>Facility</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Mark Joseph Batinga</td>
-                        <td>Astrazeniza</td>
-                        <td>San Narciso, Zambales</td>
-                        <td>
-                            2nd Dose
-                        </td>
-                        <td>
-                            <button type="button" class="trans-btn" @onclick="OnUpdate">Update</button>
-                            <button type="button" class="trans-btn">Delete</button>
-                        </td>
-                    </tr>
-                    <tr class="active-row">
-                        <td>Charisse Viste</td>
-                        <td>Pfizer</td>
-                        <td>Agoo, La Union</td>
-                        <td>
-                            1st Dose
-                        </td>
-                        <td>
-                            <button type="button" class="trans-btn">Update</button>
-                            <button type="button" class="trans-btn">Delete</button>
-                        </td>
-                    </tr>
+                    @foreach (var vaccine in Vaccines)
+                    {
+                        <tr>
+                            <td>@vaccine.FirstName @vaccine.LastName</td>
+                            <td>@vaccine.FirstManufacturer</td>
+                            <td>@vaccine.Barangay, @vaccine.Town, @vaccine.Province</td>
+                            <td>
+                                @vaccine.Facility
+                            </td>
+                            <td>
+                                <button type="button" class="trans-btn" @onclick="OnUpdate">Update</button>
+                                <button type="button" class="trans-btn">Delete</button>
+                            </td>
+                        </tr>
+                    }
                 </tbody>
             </table>
         </div>
@@ -62,6 +54,19 @@
 </section>
 
 @code {
+    List<Vaccine> Vaccines = new List<Vaccine>();
+
+
+    protected async override Task OnInitializedAsync()
+    {
+        var result = await VaccineService.GetAllVaccine();
+        if(result != null)
+        {
+            Vaccines = result;
+        }
+    }
+
+
     private void OnUpdate()
     {
         NavManager.NavigateTo("admin/userform");

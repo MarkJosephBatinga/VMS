@@ -22,6 +22,8 @@ namespace VMS.Server.Services.VaccineService
 
         public async Task<List<Vaccine>> AddVaccine(Vaccine vaccine)
         {
+            var result = await _data.verify_info.Where(v => v.UserId == vaccine.UserId).FirstOrDefaultAsync();
+            _data.verify_info.Remove(result);
             await _data.vaccine_info.AddAsync(vaccine);
             await _data.SaveChangesAsync();
             return Vaccines = await _data.vaccine_info.ToListAsync();

@@ -38,7 +38,7 @@ namespace VMS.Server.Controllers
         [HttpPost("delete")]
         public async Task<ActionResult<List<Vaccine>>> DeleteVaccine(Vaccine vaccine)
         {
-            return Vaccines = await _service.RemoveVaccine(verify);
+            return Vaccines = await _service.RemoveVaccine(vaccine);
         }
 
         [HttpGet("displayall")]

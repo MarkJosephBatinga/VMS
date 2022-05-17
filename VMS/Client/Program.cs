@@ -16,6 +16,7 @@ using VMS.Client.Services.AppointService;
 using VMS.Client.Services.CovidService;
 using VMS.Client.Services.LoginService;
 using VMS.Client.Services.UserService;
+using VMS.Client.Services.VaccineService;
 using VMS.Client.Services.VerifyService;
 
 namespace VMS.Client
@@ -36,6 +37,7 @@ namespace VMS.Client
             builder.Services.AddScoped<IAdminService, AdminService>();
             builder.Services.AddScoped<IVerifyService, VerifyService>();
             builder.Services.AddScoped<IAppointService, AppointService>();
+            builder.Services.AddScoped<IVaccineService, VaccineService>();
             builder.Services.AddScoped<ILoginService, LoginService>();
             builder.Services.AddScoped<ICovidService, CovidService>();
 
