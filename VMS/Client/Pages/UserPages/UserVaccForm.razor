@@ -2,6 +2,8 @@
 @attribute [Authorize(Roles = "user")]
 @layout UserAuthLayout
 @inject NavigationManager NavManager
+@inject IAppointService AppointService
+@inject IToastService Toast 
 
 <section class="main-body px-3 px-md-5 my-3">
     <div class="top-container">
@@ -14,62 +16,72 @@
                     <h3 class="form-title me-auto">Get Your Vaccine !!!</h3>
                     <img src="./css/images/safeguard.png" alt="Safeguard" class="title-img">
                 </div>
-                <form action="">
+                <EditForm Model="appoint" OnValidSubmit="OnSubmit">
+                    <DataAnnotationsValidator></DataAnnotationsValidator>
                     <div class="row">
                         <div class="col">
                             <p class="form-label">Last Name</p>
-                            <input type="text" class="form-input" name="" placeholder="Last Name">
+                            <ValidationMessage For="() => appoint.LastName" />
+                            <input type="text" class="form-input" @bind-value="appoint.LastName" placeholder="Last Name">
                         </div>
                         <div class="col">
                             <p class="form-label">First Name</p>
-                            <input type="text" class="form-input" name="" placeholder="Last Name">
+                            <ValidationMessage For="() => appoint.FirstName" />
+                            <input type="text" class="form-input" @bind-value="appoint.FirstName" placeholder="Last Name">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col">
                             <p class="form-label">Middle Name</p>
-                            <input type="text" class="form-input" name="" placeholder="Middle Name">
+                            <ValidationMessage For="() => appoint.MiddleName" />
+                            <input type="text" class="form-input" @bind-value="appoint.MiddleName" placeholder="Middle Name">
                         </div>
                         <div class="col">
                             <p class="form-label">Suffix</p>
-                            <input type="text" class="form-input" name="" placeholder="Suffix">
+                            <input type="text" class="form-input" @bind-value="appoint.Suffix" placeholder="Suffix">
                         </div>
                     </div>
                     <h3 class="address-title">Address</h3>
                     <div class="row">
                         <div class="col">
                             <p class="form-label">Barangay</p>
-                            <input type="text" class="form-input" name="" placeholder="Barangay">
+                            <ValidationMessage For="() => appoint.Barangay" />
+                            <input type="text" class="form-input" @bind-value="appoint.Barangay" placeholder="Barangay">
                         </div>
                         <div class="col">
                             <p class="form-label">Town/City</p>
-                            <input type="text" class="form-input" name="" placeholder="Town/City">
+                            <ValidationMessage For="() => appoint.Town" />
+                            <input type="text" class="form-input" @bind-value="appoint.Town" placeholder="Town/City">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col">
                             <p class="form-label">Province</p>
-                            <input type="text" class="form-input" name="" placeholder="Province">
+                            <ValidationMessage For="() => appoint.Province" />
+                            <input type="text" class="form-input" @bind-value="appoint.Province" placeholder="Province">
                         </div>
                         <div class="col">
                             <p class="form-label">Zip Code</p>
-                            <input type="text" class="form-input" name="" placeholder="Zip Code">
+                            <ValidationMessage For="() => appoint.Zipcode" />
+                            <input type="text" class="form-input" @bind-value="appoint.Zipcode" placeholder="Zip Code">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col">
                             <p class="form-label">Contact Number</p>
-                            <input type="text" class="form-input" name="" placeholder="Contact Number">
+                            <ValidationMessage For="() => appoint.ContactNumber" />
+                            <input type="text" class="form-input" @bind-value="appoint.ContactNumber" placeholder="Contact Number">
                         </div>
                         <div class="col">
                             <p class="form-label">Date of Birth</p>
-                            <input type="date" class="form-input" name="">
+                            <ValidationMessage For="() => appoint.BirthDate" />
+                            <input type="date" class="form-input" @bind-value="appoint.BirthDate">
                         </div>
                     </div>
                     <div class="submit-box d-flex justify-content-end">
                         <button class="trans-btn" type="submit">Request Schedule</button>
                     </div>
-                </form>
+                </EditForm>
             </div>
         </div>
         <div class="col-md">
@@ -79,5 +91,15 @@
 </section>
 
 @code {
+    Appoint appoint = new Appoint();
 
+    private async Task OnSubmit()
+    {
+        var result = await AppointService.AddAppoint(appoint);
+        if(result != null)
+        {
+            Toast.ShowSuccess("Request Schedule Sent", "Success");
+            NavManager.NavigateTo("/user/dashboard");
+        }
+    }
 }

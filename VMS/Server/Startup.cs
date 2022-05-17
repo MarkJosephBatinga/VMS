@@ -10,6 +10,7 @@ using Microsoft.Extensions.Hosting;
 using System.Linq;
 using VMS.Server.Data;
 using VMS.Server.Services.AdminService;
+using VMS.Server.Services.AppointService;
 using VMS.Server.Services.LoginService;
 using VMS.Server.Services.UserService;
 using VMS.Server.Services.VerifyService;
@@ -39,6 +40,7 @@ namespace VMS.Server
             services.AddScoped<IAdminService, AdminService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IVerifyService, VerifyService>();
+            services.AddScoped<IAppointService, AppointService>();
             services.AddScoped<ILoginService, LoginService>();
             services.AddAuthentication(options => {
                 options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;

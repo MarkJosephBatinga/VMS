@@ -1,7 +1,9 @@
-﻿@page "/admin/appointform"
+﻿@page "/admin/appointform/{Id:int}"
 @attribute [Authorize(Roles = "admin")]
 @layout AdminAuthLayout
 @inject NavigationManager NavManager
+@inject IAppointService AppointService
+@inject IToastService Toast
 
 <section class="admin-body px-3 px-md-5 my-3">
     <div class="top-container d-md-flex align-items-center px-lg-5">
@@ -15,99 +17,119 @@
     </div>
     <div class="lower-container mt-5">
         <div class="form-box">
-            <form action="">
+            <EditForm Model="appoint" OnValidSubmit="OnUpdate">
+                <DataAnnotationsValidator></DataAnnotationsValidator>
                 <h4 class="group-title">Full Name</h4>
                 <div class="form-group row mb-4">
                     <div class="col-md">
                         <p class="form-label">First Name</p>
-                        <input type="text" name="" placeholder="Batinga" class="form-input">
+                        <ValidationMessage For="() => appoint.FirstName" />
+                        <input type="text" name="" @bind-value="appoint.LastName" class="form-input">
                     </div>
                     <div class="col-md">
                         <p class="form-label">Last Name</p>
-                        <input type="text" name="" placeholder="Mark Joseph" class="form-input">
+                        <ValidationMessage For="() => appoint.LastName" />
+                        <input type="text" name="" @bind-value="appoint.LastName" class="form-input">
                     </div>
                     <div class="col-md">
                         <p class="form-label">Middle Name</p>
-                        <input type="text" name="" placeholder="Quinones" class="form-input">
+                        <ValidationMessage For="() => appoint.MiddleName" />
+                        <input type="text" name="" @bind-value="appoint.MiddleName" class="form-input">
                     </div>
                     <div class="col-md">
                         <p class="form-label">Suffix</p>
-                        <input type="text" name="" placeholder="III" class="form-input">
+                        <input type="text" name="" @bind-value="appoint.Suffix" class="form-input">
                     </div>
                 </div>
                 <h4 class="group-title">Address</h4>
                 <div class="form-group row mb-4">
                     <div class="col-md">
                         <p class="form-label">Barangay</p>
-                        <input type="text" name="" placeholder="Alusiis" class="form-input">
+                        <ValidationMessage For="() => appoint.Barangay" />
+                        <input type="text" name="" @bind-value="appoint.Barangay" class="form-input">
                     </div>
                     <div class="col-md">
                         <p class="form-label">Town/City</p>
-                        <input type="text" name="" placeholder="San Narciso" class="form-input">
+                        <ValidationMessage For="() => appoint.Town" />
+                        <input type="text" name="" @bind-value="appoint.Town" class="form-input">
                     </div>
                     <div class="col-md">
                         <p class="form-label">Province</p>
-                        <input type="text" name="" placeholder="Zambales" class="form-input">
+                        <ValidationMessage For="() => appoint.Province" />
+                        <input type="text" name="" @bind-value="appoint.Province" class="form-input">
                     </div>
                     <div class="col-md">
                         <p class="form-label">Zip Code</p>
-                        <input type="text" name="" placeholder="2025" class="form-input">
+                        <ValidationMessage For="() => appoint.Zipcode" />
+                        <input type="text" name="" @bind-value="appoint.Zipcode" class="form-input">
                     </div>
                 </div>
                 <h4 class="group-title">Vaccination Info</h4>
                 <div class="form-group row mb-4">
                     <div class="col-md-2">
                         <p class="form-label">Date</p>
-                        <input type="date" name="" class="form-input">
-                    </div>
-                    <div class="col-md-2">
-                        <p class="form-label">Time</p>
-                        <input type="time" name="" class="form-input">
-                    </div>
-                    <div class="col-md">
-                        <p class="form-label">Manufacturer Name</p>
-                        <input type="text" name="" placeholder="Pfizer" class="form-input">
-                    </div>
-                    <div class="col-md">
-                        <p class="form-label">Vaccinator Name</p>
-                        <input type="text" name="" placeholder="Dr. Strange" class="form-input">
+                        <input type="date" name="" @bind-value="appoint.VaccDate" class="form-input">
                     </div>
                 </div>
                 <h4 class="group-title">Health Facility</h4>
                 <div class="form-group row mb-4">
                     <div class="col-md-4">
                         <p class="form-label">Health Facility Name</p>
-                        <input type="text" name="" placeholder="RHU San Narciso" class="form-input">
+                        <input type="text" name="" @bind-value="appoint.Facility" class="form-input">
                     </div>
                     <div class="col-md-4">
                         <p class="form-label">Contact Number</p>
-                        <input type="text" name="" placeholder="09501109163" class="form-input">
+                        <input type="text" name=""@bind-value="appoint.FacilityNumber" class="form-input">
                     </div>
                 </div>
                 <h4 class="group-title">Health Facility Address</h4>
                 <div class="form-group row mb-4">
                     <div class="col-md">
                         <p class="form-label">Barangay</p>
-                        <input type="text" name="" placeholder="Alusiis" class="form-input">
+                        <input type="text" name=""@bind-value="appoint.FacilityBarangay" class="form-input">
                     </div>
                     <div class="col-md">
                         <p class="form-label">Town/City</p>
-                        <input type="text" name="" placeholder="San Narciso" class="form-input">
+                        <input type="text" name="" @bind-value="appoint.FacilityTown" class="form-input">
                     </div>
                     <div class="col-md">
                         <p class="form-label">Province</p>
-                        <input type="text" name="" placeholder="Zambales" class="form-input">
+                        <input type="text" name=""@bind-value="appoint.FacilityProvince" class="form-input">
                     </div>
                 </div>
                 <div class="submit-box d-flex justify-content-end">
-                    <a href="" type="button" class="cancel-btn mx-3">Cancel</a>
+                    <a href="/admin/appointment" type="button" class="cancel-btn mx-3">Cancel</a>
                     <button type="submit" class="submit-btn">Submit</button>
                 </div>
-            </form>
+            </EditForm>
         </div>
     </div>
 </section>
 
 @code {
+    [Parameter]
+    public int? Id { get; set; }
+    Appoint appoint = new Appoint();
 
+    protected override async Task OnInitializedAsync()
+    {
+        if(Id.HasValue)
+        {
+            var result = await AppointService.GetAppoint(Id.Value);
+            if(result != null)
+            {
+                appoint = result;
+            }
+        }
+    }
+
+    private async Task OnUpdate()
+    {
+        var result = await AppointService.UpdateAppoint(appoint);
+        if(result != null)
+        {
+            Toast.ShowSuccess("Update Successfull", "Success");
+            NavManager.NavigateTo("/admin/appointment");
+        }
+    }
 }

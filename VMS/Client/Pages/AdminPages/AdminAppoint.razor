@@ -2,6 +2,7 @@
 @attribute [Authorize(Roles = "admin")]
 @layout AdminAuthLayout
 @inject NavigationManager NavManager
+@inject IAppointService AppointService
 
 <section class="admin-body px-3 px-md-5 my-3">
     <div class="top-container d-flex align-items-center px-lg-5">
@@ -26,40 +27,45 @@
                         <th>Full Name</th>
                         <th>Contact Number</th>
                         <th>Address</th>
-                        <th>Age</th>
+                        <th>Birth Date</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Batinga, Mark Joseph</td>
-                        <td>09501109163</td>
-                        <td>San Narciso, Zambales</td>
-                        <td>20</td>
-                        <td>
-                            <button type="button" class="trans-btn" @onclick="OnUpdate">Update</button>
-                            <button type="button" class="trans-btn">Delete</button>
-                        </td>
-                    </tr>
-                    <tr class="active-row">
-                        <td>Viste, Charisse</td>
-                        <td>09501109163</td>
-                        <td>San Narciso, Zambales</td>
-                        <td>21</td>
-                        <td>
-                            <button type="button" class="trans-btn">Update</button>
-                            <button type="button" class="trans-btn">Delete</button>
-                        </td>
-                    </tr>
+                    @foreach (var appoint in Appoints)
+                    {
+                        <tr>
+                            <td>@appoint.LastName, @appoint.FirstName</td>
+                            <td>@appoint.ContactNumber</td>
+                            <td>@appoint.Barangay, @appoint.Town, @appoint.Province - @appoint.Zipcode </td>
+                            <td>@appoint.BirthDate.ToShortDateString()</td>
+                            <td>
+                                <button type="button" class="trans-btn" @onclick="() => OnUpdate(appoint.Id)">Update</button>
+                                <button type="button" class="trans-btn">Delete</button>
+                            </td>
+                        </tr>
+                    }
                 </tbody>
             </table>
         </div>
     </div>
 </section>
 
-@code {
-    private void OnUpdate()
+@code {        
+    List<Appoint> Appoints = new List<Appoint>();
+
+
+    protected async override Task OnInitializedAsync()
     {
-        NavManager.NavigateTo("admin/appointform");
+        var result = await AppointService.GetAllAppoint();
+        if(result != null)
+        {
+            Appoints = result;
+        }
+    }
+
+    private void OnUpdate(int Id)
+    {
+        NavManager.NavigateTo($"admin/appointform/{Id}");
     }
 }
