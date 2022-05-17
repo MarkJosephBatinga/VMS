@@ -10,6 +10,7 @@ namespace VMS.Server.Services.VaccineService
     {
         Task<List<Vaccine>> AddVaccine(Vaccine vaccine);
         Task<Vaccine> GetVaccine(int vaccineId);
+        Task<Vaccine> GetVaccinePerUser(int userId);
         Task<List<Vaccine>> UpdateVaccine(Vaccine vaccine);
         Task<List<Vaccine>> RemoveVaccine(Vaccine vaccine);
         Task<List<Vaccine>> LoadAllVaccine();

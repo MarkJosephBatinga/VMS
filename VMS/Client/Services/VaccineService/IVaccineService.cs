@@ -17,5 +17,6 @@ namespace VMS.Client.Services.VaccineService
         Task<List<Vaccine>> GetAllVaccine();
 
         Task<Vaccine> GetVaccine(int Id);
+        Task<Vaccine> GetVaccinePerUser(int Id);
     }
 }

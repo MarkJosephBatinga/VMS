@@ -42,6 +42,12 @@ namespace VMS.Client.Services.VaccineService
             return result;
         }
 
+        public async Task<Vaccine> GetVaccinePerUser(int Id)
+        {
+            var result = await _http.GetFromJsonAsync<Vaccine>($"api/vaccine/displayperuser/{Id}");
+            return result;
+        }
+
         public async Task<List<Vaccine>> UpdateVaccine(Vaccine vaccine)
         {
             var result = await _http.PostAsJsonAsync("api/vaccine/update", vaccine);

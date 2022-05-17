@@ -52,5 +52,11 @@ namespace VMS.Server.Controllers
         {
             return vaccine = await _service.GetVaccine(Id);
         }
+
+        [HttpGet("displayperuser/{Id:int}")]
+        public async Task<ActionResult<Vaccine>> GetVaccinePerUser(int Id)
+        {
+            return vaccine = await _service.GetVaccinePerUser(Id);
+        }
     }
 }

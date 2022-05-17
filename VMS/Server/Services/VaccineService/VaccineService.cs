@@ -58,5 +58,18 @@ namespace VMS.Server.Services.VaccineService
             }
             return Vaccines;
         }
+
+        public async Task<Vaccine> GetVaccinePerUser(int userId)
+        {
+            vaccine = await _data.vaccine_info.Where(v => v.UserId == userId).FirstOrDefaultAsync();
+            if (vaccine == null)
+            {
+                return vaccine = new Vaccine();
+            }
+            else
+            {
+                return vaccine;
+            }
+        }
     }
 }

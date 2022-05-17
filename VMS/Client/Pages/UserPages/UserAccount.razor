@@ -4,7 +4,7 @@
 @inject ILoginService LoginService
 @inject ILocalStorageService LocalStorage
 @inject NavigationManager NavManager
-@inject NavigationManager NavManager
+@inject IVaccineService VaccineService
 @inject IJSRuntime JsRun
 
 <section class="main-body px-3 px-md-5 my-3">
@@ -14,12 +14,18 @@
             <span class="change-color">
                 @user.FirstName
             </span>
-            <img src="./css/images/verified.png" alt="" class="verify-img">
+            @if (vaccine.Id != 0)
+            {
+                <img src="./css/images/verified.png" alt="" class="verify-img">
+            }
         </h1>
-        <button class="qr-btn" @onclick="OnQr">
-            Scan Qr
-            <img src="./css/images/qr-code.png" alt="qr-code" class="qr-img">
-        </button>
+        @if (vaccine.Id != 0)
+        {
+            <button class="qr-btn" @onclick="OnQr">
+                Scan Qr
+                <img src="./css/images/qr-code.png" alt="qr-code" class="qr-img">
+            </button>
+        }
     </div>
     <div class="lower-container">
         <div class="overview-box d-md-flex">
@@ -36,35 +42,35 @@
                     <div class="row">
                         <div class="col-md p-text">
                             Last Name:
-                            <span class="black-change-color">@user.LastName</span>
+                            <span class="black-change-color">@(vaccine.Id != 0 ? vaccine.LastName: "Not Verified")</span>
                         </div>
                         <div class="col-md p-text">
                             First Name:
-                            <span class="black-change-color">@user.FirstName</span>
+                            <span class="black-change-color">@(vaccine.Id != 0 ? vaccine.FirstName: "Not Verified")</span>
                         </div>
                         <div class="col-md p-text">
                             Middle Name:
-                            <span class="black-change-color">Not Verified</span>
+                            <span class="black-change-color">@(vaccine.Id != 0 ? vaccine.MiddleName: "Not Verified")</span>
                         </div>
                         <div class="col-md-2 p-text">
                             Suffix:
-                            <span class="black-change-color"></span>
+                            <span class="black-change-color">@(vaccine.Id != 0 ? vaccine.Suffix: "Not Verified")</span>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-8 p-text">
                             Address:
-                            <span class="black-change-color">Not Verified</span>
+                            <span class="black-change-color">@(vaccine.Id != 0 ? $"{vaccine.Barangay}, {vaccine.Town}, {vaccine.Province}-{vaccine.Zipcode}": "Not Verified")</span>
                         </div>
                         <div class="col-md p-text">
                             Contact Number:
-                            <span class="black-change-color">Not Verified</span>
+                            <span class="black-change-color">@(vaccine.Id != 0 ? vaccine.ContactNumber: "Not Verified")</span>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md p-text">
                             Date of Birth:
-                            <span class="black-change-color">Not Verified</span>
+                            <span class="black-change-color">@(vaccine.Id != 0 ? vaccine.BirthDate.ToShortDateString(): "Not Verified")</span>
                         </div>
                     </div>
                 </div>
@@ -88,22 +94,22 @@
                                 </td>
                                 <td>
                                     <span class="data-span">
-                                        Not Verified
+                                        @(vaccine.Id != 0 ? vaccine.FirstDate.ToShortDateString(): "Not Verified")
                                     </span>
                                 </td>
                                 <td>
                                     <span class="data-span">
-                                        Not Verified
+                                        @(vaccine.Id != 0 ? vaccine.FirstManufacturer: "Not Verified")
                                     </span>
                                 </td>
                                 <td>
                                     <span class="data-span">
-                                        Not Verified
+                                        @(vaccine.Id != 0 ? vaccine.FirstBatch: "Not Verified")
                                     </span>
                                 </td>
                                 <td>
                                     <span class="data-span">
-                                        Not Verified
+                                        @(vaccine.Id != 0 ? vaccine.FirstLot: "Not Verified")
                                     </span>
                                 </td>
                             </tr>
@@ -112,7 +118,7 @@
                                     <p class="dose">
                                         Vaccinator Name:
                                         <span class="data-span">
-                                            Not Verified
+                                            @(vaccine.Id != 0 ? vaccine.FirstVaccinator: "Not Verified")
                                         </span>
                                     </p>
                                 </td>
@@ -125,22 +131,22 @@
                                 </td>
                                 <td>
                                     <span class="data-span">
-                                        Not Verified
+                                        @(vaccine.Id != 0 ? vaccine.SecondDate.ToShortDateString(): "Not Verified")
                                     </span>
                                 </td>
                                 <td>
                                     <span class="data-span">
-                                        Not Verified
+                                        @(vaccine.Id != 0 ? vaccine.SecondManufacturer: "Not Verified")
                                     </span>
                                 </td>
                                 <td>
                                     <span class="data-span">
-                                        Not Verified
+                                        @(vaccine.Id != 0 ? vaccine.SecondBatch: "Not Verified")
                                     </span>
                                 </td>
                                 <td>
                                     <span class="data-span">
-                                        Not Verified
+                                        @(vaccine.Id != 0 ? vaccine.SecondLot: "Not Verified")
                                     </span>
                                 </td>
                             </tr>
@@ -149,7 +155,7 @@
                                     <p class="dose">
                                         Vaccinator Name:
                                         <span class="data-span">
-                                            Not Verified
+                                            @(vaccine.Id != 0 ? vaccine.SecondVaccinator: "Not Verified")
                                         </span>
                                     </p>
                                 </td>
@@ -161,26 +167,30 @@
                     <div class="d-md-flex">
                         <div class="f-text me-auto">
                             Facility Name:
-                            <span class="f-black">Not Verified</span>
+                            <span class="f-black"> @(vaccine.Id !=0 ? vaccine.Facility: "Not Verified" )</span>
                         </div>
                         <div class="f-text">
                             Contact Number:
-                            <span class="f-black">Not Verified</span>
+                            <span class="f-black">@(vaccine.Id != 0 ? vaccine.FacilityContact: "Not Verified")</span>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="verify-container mt-5">
-            <div class="verify-box w-100 d-flex justify-content-end">
-                <h3 class="verify-text">To Verify Your Account. <a @onclick="OnVerify" class="a-verify">Click Here..</a> </h3>
+        @if (vaccine.Id == 0)
+        {
+            <div class="verify-container mt-5">
+                <div class="verify-box w-100 d-flex justify-content-end">
+                    <h3 class="verify-text">To Verify Your Account. <a @onclick="OnVerify" class="a-verify">Click Here..</a> </h3>
+                </div>
             </div>
-        </div>
+        }
     </div>
 </section>
 
 @code {      
     User user = new User();
+    Vaccine vaccine = new Vaccine();
 
     protected async override Task OnInitializedAsync()
     {
@@ -189,8 +199,13 @@
         if(result != null)
         {
             user = result;
+            var dbVaccine = await VaccineService.GetVaccinePerUser(result.Id);
+            if(dbVaccine != null)
+            {
+                vaccine = dbVaccine;
+            }
         }
-        await JsRun.InvokeVoidAsync("console.log", user);
+        await JsRun.InvokeVoidAsync("console.log", vaccine);
     }
 
     private void OnVerify()

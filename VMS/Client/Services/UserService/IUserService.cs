@@ -15,6 +15,7 @@ namespace VMS.Client.Services.UserService
         Task<List<User>> DeleteUser(User user);
 
         Task<List<User>> GetAllUser();
+        Task<List<User>> GetAllUnvaccinatedUser();
 
         Task<User> GetUser(int Id);
     }

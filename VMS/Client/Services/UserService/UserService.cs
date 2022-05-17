@@ -30,6 +30,12 @@ namespace VMS.Client.Services.UserService
             return status;
         }
 
+        public async Task<List<User>> GetAllUnvaccinatedUser()
+        {
+            var result = await _http.GetFromJsonAsync<List<User>>($"api/user/unvacc");
+            return result;
+        }
+
         public async Task<List<User>> GetAllUser()
         {
             var result = await _http.GetFromJsonAsync<List<User>>($"api/user/displayall");

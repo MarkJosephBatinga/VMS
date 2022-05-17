@@ -56,5 +56,19 @@ namespace VMS.Server.Services.UserService
             }
             return Users;
         }
+
+        public async Task<List<User>> LoadAllUnvaccinatedUsers()
+        {
+            var result = await _data.user_info.ToListAsync();
+            foreach (var user in result)
+            {
+                var dbvaccinated = await _data.vaccine_info.Where(u => u.UserId == user.Id).FirstOrDefaultAsync();
+                if (dbvaccinated == null)
+                {
+                    Users.Add(user);
+                }
+            }
+            return Users;
+        }
     }
 }

@@ -17,5 +17,6 @@ namespace VMS.Server.Services.UserService
         Task<List<User>> RemoveUser(User user);
 
         Task<List<User>> LoadAllUsers();
+        Task<List<User>> LoadAllUnvaccinatedUsers();
     }
 }

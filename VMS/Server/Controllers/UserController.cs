@@ -47,6 +47,12 @@ namespace VMS.Server.Controllers
             return Users = await _service.LoadAllUsers();
         }
 
+        [HttpGet("unvacc")]
+        public async Task<ActionResult<List<User>>> GetAllUnvaccinatedUser()
+        {
+            return Users = await _service.LoadAllUnvaccinatedUsers();
+        }
+
         [HttpGet("display/{Id:int}")]
         public async Task<ActionResult<User>> GetUser(int Id)
         {

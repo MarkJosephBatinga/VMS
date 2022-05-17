@@ -1,4 +1,5 @@
-﻿@page "/admin/userform/add/{Id:int}"
+﻿@page "/admin/userform/add/{UserId:int}"
+@page "/admin/userform/update/{VaccineId:int}"
 @attribute [Authorize(Roles = "admin")]
 @layout AdminAuthLayout
 @inject NavigationManager NavManager
@@ -13,7 +14,7 @@
             <h3 class="title-text">User Information</h3>
         </div>
         <div class="right-box mt-3 mt-md-0">
-            <h4 class="user-email">@user.email.ToUpper()</h4>
+            <h4 class="user-email">@(user.Id == 0 ? "No Email": user.email)</h4>
         </div>
     </div>
     <div class="lower-container mt-5">
@@ -29,16 +30,16 @@
                     <div class="col-md">
                         <p class="form-label">Last Name</p>
                         <ValidationMessage For="() => vaccine.LastName" />
-                        <input type="text" name=""  @bind-value="vaccine.LastName" class="form-input">
+                        <input type="text" name="" @bind-value="vaccine.LastName" class="form-input">
                     </div>
                     <div class="col-md">
                         <p class="form-label">Middle Name</p>
                         <ValidationMessage For="() => vaccine.MiddleName" />
-                        <input type="text" name=""  @bind-value="vaccine.MiddleName" class="form-input">
+                        <input type="text" name="" @bind-value="vaccine.MiddleName" class="form-input">
                     </div>
                     <div class="col-md">
                         <p class="form-label">Suffix</p>
-                        <input type="text" name=""  @bind-value="vaccine.Suffix" class="form-input">
+                        <input type="text" name="" @bind-value="vaccine.Suffix" class="form-input">
                     </div>
                 </div>
                 <h4 class="group-title">Address</h4>
@@ -51,17 +52,17 @@
                     <div class="col-md">
                         <p class="form-label">Town/City</p>
                         <ValidationMessage For="() => vaccine.Town" />
-                        <input type="text" name=""  @bind-value="vaccine.Town" class="form-input">
+                        <input type="text" name="" @bind-value="vaccine.Town" class="form-input">
                     </div>
                     <div class="col-md">
                         <p class="form-label">Province</p>
                         <ValidationMessage For="() => vaccine.Province" />
-                        <input type="text" name=""  @bind-value="vaccine.Province" class="form-input">
+                        <input type="text" name="" @bind-value="vaccine.Province" class="form-input">
                     </div>
                     <div class="col-md">
                         <p class="form-label">Zip Code</p>
                         <ValidationMessage For="() => vaccine.Zipcode" />
-                        <input type="text" name=""  @bind-value="vaccine.Zipcode" class="form-input">
+                        <input type="text" name="" @bind-value="vaccine.Zipcode" class="form-input">
                     </div>
                 </div>
                 <h4 class="group-title">Other Info</h4>
@@ -69,31 +70,31 @@
                     <div class="col-md-4">
                         <p class="form-label">BirthDate</p>
                         <ValidationMessage For="() => vaccine.BirthDate" />
-                        <input type="date" name=""  @bind-value="vaccine.BirthDate" class="form-input">
+                        <input type="date" name="" @bind-value="vaccine.BirthDate" class="form-input">
                     </div>
                     <div class="col-md-4">
                         <p class="form-label">Contact Number</p>
                         <ValidationMessage For="() => vaccine.ContactNumber" />
-                        <input type="text" name=""  @bind-value="vaccine.ContactNumber" class="form-input">
+                        <input type="text" name="" @bind-value="vaccine.ContactNumber" class="form-input">
                     </div>
                 </div>
                 <h4 class="group-title">First Dose</h4>
                 <div class="form-group row mb-4">
                     <div class="col-md-2">
                         <p class="form-label">Date</p>
-                        <input type="date" name=""  @bind-value="vaccine.FirstDate" class="form-input">
+                        <input type="date" name="" @bind-value="vaccine.FirstDate" class="form-input">
                     </div>
                     <div class="col-md">
                         <p class="form-label">Manufacturer Name</p>
-                        <input type="text" name=""  @bind-value="vaccine.FirstManufacturer" class="form-input">
+                        <input type="text" name="" @bind-value="vaccine.FirstManufacturer" class="form-input">
                     </div>
                     <div class="col-md">
                         <p class="form-label">Vaccinator Name</p>
-                        <input type="text" name=""  @bind-value="vaccine.FirstVaccinator" class="form-input">
+                        <input type="text" name="" @bind-value="vaccine.FirstVaccinator" class="form-input">
                     </div>
                     <div class="col-md-2">
                         <p class="form-label">Batch No.</p>
-                        <input type="text" name=""  @bind-value="vaccine.FirstBatch" class="form-input">
+                        <input type="text" name="" @bind-value="vaccine.FirstBatch" class="form-input">
                     </div>
                     <div class="col-md-2">
                         <p class="form-label">Lot No.</p>
@@ -104,34 +105,34 @@
                 <div class="form-group row mb-4">
                     <div class="col-md-2">
                         <p class="form-label">Date</p>
-                        <input type="date" name=""  @bind-value="vaccine.SecondDate" class="form-input">
+                        <input type="date" name="" @bind-value="vaccine.SecondDate" class="form-input">
                     </div>
                     <div class="col-md">
                         <p class="form-label">Manufacturer Name</p>
-                        <input type="text" name=""  @bind-value="vaccine.SecondManufacturer" class="form-input">
+                        <input type="text" name="" @bind-value="vaccine.SecondManufacturer" class="form-input">
                     </div>
                     <div class="col-md">
                         <p class="form-label">Vaccinator Name</p>
-                        <input type="text" name=""  @bind-value="vaccine.SecondVaccinator" class="form-input">
+                        <input type="text" name="" @bind-value="vaccine.SecondVaccinator" class="form-input">
                     </div>
                     <div class="col-md-2">
                         <p class="form-label">Batch No.</p>
-                        <input type="text" name=""  @bind-value="vaccine.SecondBatch" class="form-input">
+                        <input type="text" name="" @bind-value="vaccine.SecondBatch" class="form-input">
                     </div>
                     <div class="col-md-2">
                         <p class="form-label">Lot No.</p>
-                        <input type="text" name=""  @bind-value="vaccine.SecondLot" class="form-input">
+                        <input type="text" name="" @bind-value="vaccine.SecondLot" class="form-input">
                     </div>
                 </div>
                 <h4 class="group-title">Health Facility</h4>
                 <div class="form-group row mb-4">
                     <div class="col-md-4">
                         <p class="form-label">Health Facility Name</p>
-                        <input type="text" name=""  @bind-value="vaccine.Facility" class="form-input">
+                        <input type="text" name="" @bind-value="vaccine.Facility" class="form-input">
                     </div>
                     <div class="col-md-4">
                         <p class="form-label">Contact Number</p>
-                        <input type="text" name=""  @bind-value="vaccine.FacilityContact" class="form-input">
+                        <input type="text" name="" @bind-value="vaccine.FacilityContact" class="form-input">
                     </div>
                 </div>
                 <div class="submit-box d-flex justify-content-end">
@@ -145,32 +146,56 @@
 
 @code {
     [Parameter]
-    public int? Id { get; set; }
+    public int? UserId { get; set; }
+    [Parameter]
+    public int? VaccineId { get; set; }
+
 
     Vaccine vaccine = new Vaccine();
     User user = new User();
 
     protected async override Task OnInitializedAsync()
     {
-        if (Id.HasValue)
+        if (UserId.HasValue)
         {
-            user = await UserService.GetUser(Id.Value);
+            user = await UserService.GetUser(UserId.Value);
             if (user != null)
             {
                 vaccine.UserId = user.Id;
                 vaccine.FirstName = user.FirstName;
                 vaccine.LastName = user.LastName;
             }
+        }else if(VaccineId.HasValue)
+        {
+            var result = await VaccineService.GetVaccine(VaccineId.Value);
+            if(result != null)
+            {
+                vaccine = result;
+                user = await UserService.GetUser(result.UserId);
+            }
         }
     }
 
     private async Task OnSubmitVaccine()
     {
-        var result = await VaccineService.AddVaccine(vaccine);
-        if (result != null)
+        if (UserId.HasValue)
         {
-            Toast.ShowSuccess("User Successfully Verified", "Success");
-            NavManager.NavigateTo("/admin/vaccinated");
+            var result = await VaccineService.AddVaccine(vaccine);
+            if (result != null)
+            {
+                Toast.ShowSuccess("User Successfully Verified", "Success");
+                NavManager.NavigateTo("/admin/vaccinated");
+            }
         }
+        else if (VaccineId.HasValue)
+        {
+            var result = await VaccineService.UpdateVaccine(vaccine);
+            if (result != null)
+            {
+                Toast.ShowSuccess("Vaccination Card Successfully Updated", "Success");
+                NavManager.NavigateTo("/admin/vaccinated");
+            }
+        }
+
     }
 }
