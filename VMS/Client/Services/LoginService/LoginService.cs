@@ -38,7 +38,7 @@ namespace VMS.Client.Services.LoginService
 
         public async Task<User> LoginUser(LoginToken LoginUser)
         {
-            var result = await _http.PostAsJsonAsync("api/login/admin", LoginUser);
+            var result = await _http.PostAsJsonAsync("api/login/user", LoginUser);
             var status = await result.Content.ReadFromJsonAsync<User>();
             return status;
         }

@@ -12,6 +12,7 @@ using VMS.Server.Data;
 using VMS.Server.Services.AdminService;
 using VMS.Server.Services.LoginService;
 using VMS.Server.Services.UserService;
+using VMS.Server.Services.VerifyService;
 
 namespace VMS.Server
 {
@@ -37,6 +38,7 @@ namespace VMS.Server
             services.AddRazorPages();
             services.AddScoped<IAdminService, AdminService>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IVerifyService, VerifyService>();
             services.AddScoped<ILoginService, LoginService>();
             services.AddAuthentication(options => {
                 options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;

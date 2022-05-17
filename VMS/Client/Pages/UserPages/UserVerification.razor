@@ -2,6 +2,10 @@
 @attribute [Authorize(Roles = "user")]
 @layout UserAuthLayout
 @inject NavigationManager NavManager
+@inject IVerifyService VerifyService
+@inject ILoginService LoginService
+@inject ILocalStorageService LocalStorage
+@inject IToastService Toast
 
 <section class="main-body px-3 px-md-5 my-3">
     <div class="upper-container mt-md-5">
@@ -12,25 +16,31 @@
     <div class="lower-container row">
         <div class="col-md d-flex justify-content-center">
             <div class="verify-box">
-                <form action="">
+                <EditForm Model="verify" OnValidSubmit="OnSubmit">
                     <div class="vacc-card">
                         <h3 class="card-title">Vaccination Card</h3>
-                        <img src="./css/images/vacc-card.png" alt="Vaccination Card" class="card-img">
+                        <ValidationMessage For="() => verify.VaccImg" />
+                        <img src="@(verify.VaccImg == null ? "./css/images/vacc-card.png" : verify.VaccImg)" alt="Vaccination Card" class="card-img">
                         <br>
-                        <input type="file" name="" id="" class="file-input">
+                        <InputFile type="file" OnChange="OnVaccImgChange"
+                                   accept="image/x-png,image/gif,image/jpeg,image/avi,image/webp" name="product-image"
+                                   id="product-image" />
                         <p class="card-hint">Provide a clear image of your vaccination card</p>
                     </div>
                     <div class="id-card mt-5">
                         <h3 class="card-title">Valid Id/Government Id</h3>
-                        <img src="./css/images/valid-id.png" alt="Valid ID Card" class="card-img">
+                        <ValidationMessage For="() => verify.IdImg" />
+                        <img src="@(verify.IdImg == null ? "./css/images/valid-id.png" : verify.IdImg)" alt="Valid ID Card" class="card-img">
                         <br>
-                        <input type="file" name="" id="" class="file-input">
+                        <InputFile type="file" OnChange="OnIdImgChange"
+                                   accept="image/x-png,image/gif,image/jpeg,image/avi,image/webp" name="product-image"
+                                   id="product-image" />
                         <p class="card-hint">Provide a clear image of the Id, both front and back</p>
                     </div>
                     <div class="submit-box d-flex justify-content-end mt-5">
                         <button type="submit" class="trans-btn">Submit</button>
                     </div>
-                </form>
+                </EditForm>
             </div>
         </div>
         <div class="col-md">
@@ -43,9 +53,56 @@
 
 
 @code {
+    Verify verify = new Verify();
+    int Id;
+
+
+    protected async override Task OnInitializedAsync()
+    {
+        var username = await LocalStorage.GetItemAsStringAsync("username");
+        var user = await LoginService.GetUser(username);
+        Id = user.Id;
+    }
 
     private void OnVaccine()
     {
         NavManager.NavigateTo("/user/vaccination");
+    }
+
+    private async Task OnSubmit()
+    {
+        verify.UserId = Id;
+        var result = await VerifyService.AddVerify(verify);
+        if(result != null)
+        {
+            Toast.ShowSuccess("Verification Request Sent", "Success");
+            NavManager.NavigateTo("/user/dashboard");
+        }
+    }
+
+    private async Task OnVaccImgChange(InputFileChangeEventArgs e)
+    {
+        var format = e.File.ContentType;
+        long maxFileSize = 1024 * 1024 * 15;
+
+        var resizedImage = await e.File.RequestImageFileAsync(format, 600, 600);
+        var buffer = new byte[resizedImage.Size];
+        await resizedImage.OpenReadStream(maxFileSize).ReadAsync(buffer);
+        var imageData = $"data:{format};base64,{Convert.ToBase64String(buffer)}";
+        verify.VaccImg = imageData;
+        verify.VaccImgName = e.File.Name;
+    }
+
+    private async Task OnIdImgChange(InputFileChangeEventArgs e)
+    {
+        var format = e.File.ContentType;
+        long maxFileSize = 1024 * 1024 * 15;
+
+        var resizedImage = await e.File.RequestImageFileAsync(format, 600, 600);
+        var buffer = new byte[resizedImage.Size];
+        await resizedImage.OpenReadStream(maxFileSize).ReadAsync(buffer);
+        var imageData = $"data:{format};base64,{Convert.ToBase64String(buffer)}";
+        verify.IdImg = imageData;
+        verify.IdImgName = e.File.Name;
     }
 }

@@ -182,11 +182,14 @@
 @code {      
     User user = new User();
 
-
     protected async override Task OnInitializedAsync()
     {
         var username = await LocalStorage.GetItemAsStringAsync("username");
-        user = await LoginService.GetUser(username);
+        var result = await LoginService.GetUser(username);
+        if(result != null)
+        {
+            user = result;
+        }
         await JsRun.InvokeVoidAsync("console.log", user);
     }
 

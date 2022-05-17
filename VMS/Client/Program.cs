@@ -15,6 +15,7 @@ using VMS.Client.Services.AdminService;
 using VMS.Client.Services.CovidService;
 using VMS.Client.Services.LoginService;
 using VMS.Client.Services.UserService;
+using VMS.Client.Services.VerifyService;
 
 namespace VMS.Client
 {
@@ -32,6 +33,7 @@ namespace VMS.Client
             builder.Services.AddBlazoredToast();
             builder.Services.AddScoped<IUserService, UserService>();
             builder.Services.AddScoped<IAdminService, AdminService>();
+            builder.Services.AddScoped<IVerifyService, VerifyService>();
             builder.Services.AddScoped<ILoginService, LoginService>();
             builder.Services.AddScoped<ICovidService, CovidService>();
 
