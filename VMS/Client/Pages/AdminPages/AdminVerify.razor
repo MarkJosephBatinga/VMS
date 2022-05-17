@@ -2,6 +2,8 @@
 @attribute [Authorize(Roles = "admin")]
 @layout AdminAuthLayout
 @inject NavigationManager NavManager
+@inject IVerifyService VerifyService
+@inject IUserService UserService 
 
 <section class="admin-body px-3 px-md-5 my-3">
     <div class="top-container d-flex align-items-center px-lg-5">
@@ -30,24 +32,18 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Batinga, Mark Joseph</td>
-                        <td>batinga_vaccine_id.png</td>
-                        <td>batinga_valid_id.png</td>
-                        <td>
-                            <button type="button" class="trans-btn" @onclick="OnUpdate">Update</button>
-                            <button type="button" class="trans-btn">Delete</button>
-                        </td>
-                    </tr>
-                    <tr class="active-row">
-                        <td>Viste, Charisse</td>
-                        <td>viste_vaccine_id.png</td>
-                        <td>viste_valid_id.png</td>
-                        <td>
-                            <button type="button" class="trans-btn">Update</button>
-                            <button type="button" class="trans-btn">Delete</button>
-                        </td>
-                    </tr>
+                    @foreach (var verify in Verifies)
+                    {
+                        <tr>
+                            <td>@verify.FullName</td>
+                            <td>@verify.VaccImgName</td>
+                            <td>@verify.IdImgName</td>
+                            <td>
+                                <button type="button" class="trans-btn" @onclick="OnUpdate">Update</button>
+                                <button type="button" class="trans-btn">Delete</button>
+                            </td>
+                        </tr>
+                    }
                 </tbody>
             </table>
         </div>
@@ -55,6 +51,22 @@
 </section>
 
 @code {
+    List<Verify> Verifies = new List<Verify>();
+
+    protected async override Task OnInitializedAsync()
+    {
+        var result = await VerifyService.GetAllVerify();
+        if(result != null)
+        {
+            Verifies = result;
+            foreach (var verify in Verifies)
+            {
+                var user = await UserService.GetUser(verify.UserId);
+                verify.FullName = $"{user.FirstName} {user.LastName}";
+            }
+        }
+    }
+
     private void OnUpdate()
     {
         NavManager.NavigateTo("admin/userform");

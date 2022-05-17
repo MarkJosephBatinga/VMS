@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,5 +18,8 @@ namespace VMS.Shared
         public string VaccImg { get; set; }
         [Required(ErrorMessage = "Valid Id is Required")]
         public string IdImg { get; set; }
+
+        [NotMapped]
+        public string FullName { get; set; }
     }
 }
