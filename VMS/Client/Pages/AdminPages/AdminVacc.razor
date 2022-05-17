@@ -3,6 +3,7 @@
 @layout AdminAuthLayout
 @inject NavigationManager NavManager
 @inject IVaccineService VaccineService
+@inject IToastService Toast
 
 <section class="admin-body px-3 px-md-5 my-3">
     <div class="top-container d-flex align-items-center px-lg-5">
@@ -43,7 +44,7 @@
                             </td>
                             <td>
                                 <button type="button" class="trans-btn" @onclick="() => OnUpdate(vaccine.Id)">Update</button>
-                                <button type="button" class="trans-btn">Delete</button>
+                                <button type="button" class="trans-btn" @onclick="() => OnDelete(vaccine)">Delete</button>
                             </td>
                         </tr>
                     }
@@ -70,5 +71,12 @@
     private void OnUpdate(int VaccineId)
     {
         NavManager.NavigateTo($"admin/userform/update/{VaccineId}");
+    }
+
+    private async Task OnDelete(Vaccine vaccine)
+    {
+        var result = await VaccineService.DeleteVaccine(vaccine);
+        Toast.ShowError("Succesfully Deleted", "Deleted");
+        Vaccines = result;
     }
 }

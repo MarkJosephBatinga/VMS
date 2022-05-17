@@ -34,11 +34,24 @@ namespace VMS.Server.Services.UserService
 
         public async Task<List<User>> LoadAllUsers()
         {
-            return Users = await _data.user_info.ToListAsync();
+            Users = await _data.user_info.ToListAsync();
+            if (Users == null)
+            {
+                return Users = new List<User>();
+            }
+            else
+            {
+                return Users;
+            }
         }
 
         public async Task<List<User>> RemoveUser(User user)
         {
+            var vaccine = await _data.vaccine_info.Where(v => v.UserId == user.Id).FirstOrDefaultAsync();
+            if(vaccine != null)
+            {
+                _data.vaccine_info.Remove(vaccine);
+            }
             _data.user_info.Remove(user);
             await _data.SaveChangesAsync();
             Users = await _data.user_info.ToListAsync();
@@ -68,7 +81,14 @@ namespace VMS.Server.Services.UserService
                     Users.Add(user);
                 }
             }
-            return Users;
+            if (Users == null)
+            {
+                return Users = new List<User>();
+            }
+            else
+            {
+                return Users;
+            }
         }
     }
 }

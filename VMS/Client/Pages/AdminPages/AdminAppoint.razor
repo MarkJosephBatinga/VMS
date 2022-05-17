@@ -3,6 +3,7 @@
 @layout AdminAuthLayout
 @inject NavigationManager NavManager
 @inject IAppointService AppointService
+@inject IToastService Toast
 
 <section class="admin-body px-3 px-md-5 my-3">
     <div class="top-container d-flex align-items-center px-lg-5">
@@ -41,7 +42,7 @@
                             <td>@appoint.BirthDate.ToShortDateString()</td>
                             <td>
                                 <button type="button" class="trans-btn" @onclick="() => OnUpdate(appoint.Id)">Update</button>
-                                <button type="button" class="trans-btn">Delete</button>
+                                <button type="button" class="trans-btn" @onclick="() => OnDelete(appoint)">Delete</button>
                             </td>
                         </tr>
                     }
@@ -67,5 +68,13 @@
     private void OnUpdate(int Id)
     {
         NavManager.NavigateTo($"admin/appointform/{Id}");
+    }
+
+
+    private async Task OnDelete(Appoint appoint)
+    {
+        var result = await AppointService.DeleteAppoint(appoint);
+        Toast.ShowError("Succesfully Deleted", "Deleted");
+        Appoints = result;
     }
 }

@@ -4,6 +4,7 @@
 @inject NavigationManager NavManager
 @inject IVerifyService VerifyService
 @inject IUserService UserService 
+@inject IToastService Toast
 
 <section class="admin-body px-3 px-md-5 my-3">
     <div class="top-container d-flex align-items-center px-lg-5">
@@ -40,7 +41,7 @@
                             <td>@verify.IdImgName</td>
                             <td>
                                 <button type="button" class="trans-btn" @onclick="() => OnUpdate(verify.UserId)">Update</button>
-                                <button type="button" class="trans-btn">Delete</button>
+                                <button type="button" class="trans-btn" @onclick="() => OnDelete(verify)">Delete</button>
                             </td>
                         </tr>
                     }
@@ -70,5 +71,12 @@
     private void OnUpdate(int UserId)
     {
         NavManager.NavigateTo($"/admin/userform/add/{UserId}");
+    }
+
+    private async Task OnDelete(Verify verify)
+    {
+        var result = await VerifyService.DeleteVerify(verify);
+        Toast.ShowError("Succesfully Deleted", "Deleted");
+        Verifies = result;
     }
 }

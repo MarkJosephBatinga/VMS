@@ -36,7 +36,15 @@ namespace VMS.Server.Services.VaccineService
 
         public async Task<List<Vaccine>> LoadAllVaccine()
         {
-            return Vaccines = await _data.vaccine_info.ToListAsync();
+            Vaccines = await _data.vaccine_info.ToListAsync();
+            if (Vaccines == null)
+            {
+                return Vaccines = new List<Vaccine>();
+            }
+            else
+            {
+                return Vaccines;
+            }
         }
 
         public async Task<List<Vaccine>> RemoveVaccine(Vaccine vaccine)

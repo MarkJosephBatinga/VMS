@@ -4,6 +4,8 @@
 @inject NavigationManager NavManager
 @inject ILoginService LoginService
 @inject ILocalStorageService LocalStorage
+@inject IUserService UserService
+@inject IVaccineService VaccineService
 
 <section class="admin-body px-3 px-md-5 my-3">
     <div class="top-container">
@@ -20,7 +22,7 @@
                 </div>
                 <div class="right-card w-100">
                     <h4 class="card-title">Overall Users</h4>
-                    <h3 class="stats-number">300, 000</h3>
+                    <h3 class="stats-number">@AllUsers.Count</h3>
                 </div>
             </div>
 
@@ -30,7 +32,7 @@
                 </div>
                 <div class="right-card w-100">
                     <h4 class="card-title">Unvaccinated Users</h4>
-                    <h3 class="stats-number">150, 000</h3>
+                    <h3 class="stats-number">@AllUnVacc.Count</h3>
                 </div>
             </div>
 
@@ -40,7 +42,7 @@
                 </div>
                 <div class="right-card w-100">
                     <h4 class="card-title">Vaccinated Users</h4>
-                    <h3 class="stats-number">150, 000</h3>
+                    <h3 class="stats-number">@AllVaccines.Count</h3>
                 </div>
             </div>
         </div>
@@ -49,6 +51,9 @@
 
 @code {
     Admin admin = new Admin();
+    List<Vaccine> AllVaccines = new List<Vaccine>();
+    List<User> AllUsers = new List<User>();
+    List<User> AllUnVacc = new List<User>();
 
     protected async override Task OnInitializedAsync()
     {
@@ -58,5 +63,9 @@
         {
             admin = result;
         }
+
+        AllVaccines = await VaccineService.GetAllVaccine();
+        AllUsers = await UserService.GetAllUser();
+        AllUnVacc = await UserService.GetAllUnvaccinatedUser();
     }
 }
