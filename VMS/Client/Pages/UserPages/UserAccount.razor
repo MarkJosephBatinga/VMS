@@ -1,14 +1,18 @@
 ﻿@page "/user/account"
 @attribute [Authorize(Roles = "user")]
 @layout UserAuthLayout
+@inject ILoginService LoginService
+@inject ILocalStorageService LocalStorage
 @inject NavigationManager NavManager
+@inject NavigationManager NavManager
+@inject IJSRuntime JsRun
 
 <section class="main-body px-3 px-md-5 my-3">
     <div class="upper-container pt-md-5 d-flex align-items-center">
         <h1 class="greet-title me-auto">
             Hello,
             <span class="change-color">
-                Username
+                @user.FirstName
             </span>
             <img src="./css/images/verified.png" alt="" class="verify-img">
         </h1>
@@ -32,15 +36,15 @@
                     <div class="row">
                         <div class="col-md p-text">
                             Last Name:
-                            <span class="black-change-color">Batinga</span>
+                            <span class="black-change-color">@user.LastName</span>
                         </div>
                         <div class="col-md p-text">
                             First Name:
-                            <span class="black-change-color">Mark Joseph</span>
+                            <span class="black-change-color">@user.FirstName</span>
                         </div>
                         <div class="col-md p-text">
                             Middle Name:
-                            <span class="black-change-color">Quinones</span>
+                            <span class="black-change-color">Not Verified</span>
                         </div>
                         <div class="col-md-2 p-text">
                             Suffix:
@@ -50,17 +54,17 @@
                     <div class="row">
                         <div class="col-md-8 p-text">
                             Address:
-                            <span class="black-change-color">Brgy, Alusiis, San Narciso, Zambales</span>
+                            <span class="black-change-color">Not Verified</span>
                         </div>
                         <div class="col-md p-text">
                             Contact Number:
-                            <span class="black-change-color">09501109163</span>
+                            <span class="black-change-color">Not Verified</span>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md p-text">
                             Date of Birth:
-                            <span class="black-change-color">June 23, 2001</span>
+                            <span class="black-change-color">Not Verified</span>
                         </div>
                     </div>
                 </div>
@@ -84,22 +88,22 @@
                                 </td>
                                 <td>
                                     <span class="data-span">
-                                        June 23, 2001
+                                        Not Verified
                                     </span>
                                 </td>
                                 <td>
                                     <span class="data-span">
-                                        AstraZenica
+                                        Not Verified
                                     </span>
                                 </td>
                                 <td>
                                     <span class="data-span">
-                                        CTSDN12
+                                        Not Verified
                                     </span>
                                 </td>
                                 <td>
                                     <span class="data-span">
-                                        CTMAV59
+                                        Not Verified
                                     </span>
                                 </td>
                             </tr>
@@ -108,7 +112,7 @@
                                     <p class="dose">
                                         Vaccinator Name:
                                         <span class="data-span">
-                                            S.P. Fantone, MD
+                                            Not Verified
                                         </span>
                                     </p>
                                 </td>
@@ -121,22 +125,22 @@
                                 </td>
                                 <td>
                                     <span class="data-span">
-                                        July 23, 2001
+                                        Not Verified
                                     </span>
                                 </td>
                                 <td>
                                     <span class="data-span">
-                                        AstraZenica
+                                        Not Verified
                                     </span>
                                 </td>
                                 <td>
                                     <span class="data-span">
-                                        CTSD2312
+                                        Not Verified
                                     </span>
                                 </td>
                                 <td>
                                     <span class="data-span">
-                                        CTMAV59
+                                        Not Verified
                                     </span>
                                 </td>
                             </tr>
@@ -145,7 +149,7 @@
                                     <p class="dose">
                                         Vaccinator Name:
                                         <span class="data-span">
-                                            S.P. Fantone, MD
+                                            Not Verified
                                         </span>
                                     </p>
                                 </td>
@@ -157,11 +161,11 @@
                     <div class="d-md-flex">
                         <div class="f-text me-auto">
                             Facility Name:
-                            <span class="f-black">RHU- San Narciso</span>
+                            <span class="f-black">Not Verified</span>
                         </div>
                         <div class="f-text">
                             Contact Number:
-                            <span class="f-black">09501109163</span>
+                            <span class="f-black">Not Verified</span>
                         </div>
                     </div>
                 </div>
@@ -175,7 +179,17 @@
     </div>
 </section>
 
-@code {
+@code {      
+    User user = new User();
+
+
+    protected async override Task OnInitializedAsync()
+    {
+        var username = await LocalStorage.GetItemAsStringAsync("username");
+        user = await LoginService.GetUser(username);
+        await JsRun.InvokeVoidAsync("console.log", user);
+    }
+
     private void OnVerify()
     {
         NavManager.NavigateTo("user/verification");

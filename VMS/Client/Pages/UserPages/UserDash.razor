@@ -2,6 +2,8 @@
 @attribute [Authorize(Roles = "user")]
 @layout UserAuthLayout
 @inject NavigationManager NavManager
+@inject ICovidService CovidService
+@inject IJSRuntime JsRun
 
 <section class="px-3 px-md-5 my-3">
     <div class="top-container row py-3">
@@ -26,9 +28,9 @@
                     Total number of Covid Cases:
                 </h3>
                 <h1 class="total-number text-center">
-                    1,000,000
+                    @(covid!=null ? covid.data.total: 0)
                 </h1>
-                <p class="end-text text-end">in the Philippines</p>
+                <p class="end-text text-end">in the Phiilippines</p>
             </div>
         </div>
     </div>
@@ -36,25 +38,35 @@
         <div class="analytic-box col-md d-flex flex-column align-items-center mx-md-5 m-3">
             <img src="./css/images/recovery.png" alt="Recoveries" class="a-img">
             <h3 class="analytic-title">Recoveries</h3>
-            <h2 class="analytic-number">100,000</h2>
-            <p class="end-text">as of May 9, 2022</p>
+            <h2 class="analytic-number"> @(covid!=null ? covid.data.recoveries: 0)</h2>
+            <p class="end-text">Recovery Rate: @(covid!=null ? covid.data.recovery_rate : 0)</p>
         </div>
         <div class="analytic-box col-md d-flex flex-column align-items-center mx-md-5 m-3">
             <img src="./css/images/death.png" alt="Recoveries" class="a-img">
             <h3 class="analytic-title">Fatalities</h3>
-            <h2 class="analytic-number">100,000</h2>
-            <p class="end-text">as of May 9, 2022</p>
+            <h2 class="analytic-number"> @(covid!=null ? covid.data.deaths : 0)</h2>
+            <p class="end-text">Fatality Rate:  @(covid!=null ? covid.data.fatality_rate : 0)</p>
         </div>
         <div class="analytic-box col-md d-flex flex-column align-items-center mx-md-5 m-3">
             <img src="./css/images/active.png" alt="Recoveries" class="a-img">
             <h3 class="analytic-title">Active Cases</h3>
-            <h2 class="analytic-number">100,000</h2>
-            <p class="end-text">as of May 9, 2022</p>
+            <h2 class="analytic-number">@(covid!=null ? covid.data.active_cases : 0)</h2>
+            <p class="end-text"> @(covid!=null ? covid.last_update: "unable to update")</p>
         </div>
     </div>
 </section>
 
-@code {
+@code {        
+    Covid covid = null;
+
+    protected async override Task OnInitializedAsync()
+    {
+        var result = await CovidService.GetCovidAnalytics();
+        if (result != null)
+        {
+            covid = result;
+        }
+    }
 
     private void OnVaccine()
     {

@@ -1,5 +1,6 @@
 ﻿@page "/"
 @inject NavigationManager NavManager
+@inject ILocalStorageService LocalStorage
 
 <section class="main-body px-3 px-md-5 my-3">
     <div class="header-box">
@@ -24,7 +25,14 @@
     </div>
 </section>
 
-@code {
+@code {        
+
+    protected async override Task OnInitializedAsync()
+    {
+        await LocalStorage.RemoveItemAsync("username");
+        await LocalStorage.RemoveItemAsync("role");
+    }
+
     private void OnLogin()
     {
         NavManager.NavigateTo("/user/login");
