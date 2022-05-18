@@ -5,6 +5,7 @@
 @inject IVerifyService VerifyService
 @inject IUserService UserService 
 @inject IToastService Toast
+@inject IJSRuntime JsRun
 
 <section class="admin-body px-3 px-md-5 my-3">
     <div class="top-container d-flex align-items-center px-lg-5">
@@ -37,8 +38,8 @@
                     {
                         <tr>
                             <td>@verify.FullName</td>
-                            <td>@verify.VaccImgName</td>
-                            <td>@verify.IdImgName</td>
+                            <td><img  id="myImg" src="@verify.VaccImg" alt="@verify.VaccImgName" style="width:100%;max-width:150px"></td>
+                            <td><img class="img" src="@verify.IdImg" alt="@verify.IdImgName" style="width:100%;max-width:150px"></td>
                             <td>
                                 <button type="button" class="trans-btn" @onclick="() => OnUpdate(verify.UserId)">Update</button>
                                 <button type="button" class="trans-btn" @onclick="() => OnDelete(verify)">Delete</button>
