@@ -26,7 +26,7 @@
             <table class="styled-table">
                 <thead>
                     <tr>
-                        <th>Last Name</th>
+                        <th>Full Name</th>
                         <th>Vaccination Id</th>
                         <th>Valid Id</th>
                         <th>Actions</th>
@@ -53,6 +53,7 @@
 
 @code {
     List<Verify> Verifies = new List<Verify>();
+    SearchToken token = new SearchToken();
 
     protected async override Task OnInitializedAsync()
     {
@@ -78,5 +79,24 @@
         var result = await VerifyService.DeleteVerify(verify);
         Toast.ShowError("Succesfully Deleted", "Deleted");
         Verifies = result;
+    }
+
+    private async Task OnSearch()
+    {
+        Verifies = new List<Verify>();
+        var dbVerifies = await VerifyService.GetAllVerify();
+        if (dbVerifies != null)
+        {
+            foreach (var verify in dbVerifies)
+            {
+                var user = await UserService.GetUser(verify.UserId);
+                if(user.LastName == token.LastName)
+                {
+                    verify.FullName = $"{user.FirstName} {user.LastName}";
+                    Verifies.Add(verify);
+                }
+            }
+
+        }
     }
 }

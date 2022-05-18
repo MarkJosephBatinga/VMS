@@ -12,12 +12,16 @@
             <h3 class="title-text">Appointments</h3>
         </div>
         <div class="right-box">
-            <form action="" class="d-flex align-items-center">
-                <input type="text" name="search-box" class="search-input mx-1">
-                <button type="submit" class="submit-btn">
-                    <img src="./css/images/search-btn.png" alt="Search" class="search-btn">
-                </button>
-            </form>
+            <EditForm Model="token" OnValidSubmit="OnSearch">
+                <DataAnnotationsValidator></DataAnnotationsValidator>
+                <div class="d-flex align-items-center">
+                    <ValidationMessage For="() => token.LastName" />
+                    <input type="text" @bind-value="token.LastName" placeholder="Last Name" name="search-box" class="search-input mx-1">
+                    <button type="submit" class="submit-btn">
+                        <img src="./css/images/search-btn.png" alt="Search" class="search-btn">
+                    </button>
+                </div>
+            </EditForm>
         </div>
     </div>
     <div class="lower-container">
@@ -54,7 +58,7 @@
 
 @code {        
     List<Appoint> Appoints = new List<Appoint>();
-
+    SearchToken token = new SearchToken();
 
     protected async override Task OnInitializedAsync()
     {
@@ -76,5 +80,14 @@
         var result = await AppointService.DeleteAppoint(appoint);
         Toast.ShowError("Succesfully Deleted", "Deleted");
         Appoints = result;
+    }
+
+    private async Task OnSearch()
+    {
+        var dbAppoints = await AppointService.GetAllAppoint();
+        if (dbAppoints != null)
+        {
+            Appoints = dbAppoints.Where(u => u.LastName == token.LastName).ToList();
+        }
     }
 }

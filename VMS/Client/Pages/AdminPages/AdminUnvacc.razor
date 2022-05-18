@@ -12,12 +12,16 @@
             <h3 class="title-text">Unvaccinated</h3>
         </div>
         <div class="right-box">
-            <form action="" class="d-flex align-items-center">
-                <input type="text" name="search-box" class="search-input mx-1">
-                <button type="submit" class="submit-btn">
-                    <img src="./css/images/search-btn.png" alt="Search" class="search-btn">
-                </button>
-            </form>
+            <EditForm Model="token" OnValidSubmit="OnSearch">
+                <DataAnnotationsValidator></DataAnnotationsValidator>
+                <div class="d-flex align-items-center">
+                    <ValidationMessage For="() => token.LastName" />
+                    <input type="text" @bind-value="token.LastName" placeholder="Last Name" name="search-box" class="search-input mx-1">
+                    <button type="submit" class="submit-btn">
+                        <img src="./css/images/search-btn.png" alt="Search" class="search-btn">
+                    </button>
+                </div>
+            </EditForm>
         </div>
     </div>
     <div class="lower-container">
@@ -52,7 +56,7 @@
 
 @code {      
     List<User> Users = new List<User>();
-
+    SearchToken token = new SearchToken();
 
     protected async override Task OnInitializedAsync()
     {
@@ -69,5 +73,14 @@
         var result = await UserService.DeleteUser(user);
         Toast.ShowError("Succesfully Deleted", "Deleted");
         Users = await UserService.GetAllUnvaccinatedUser();
+    }
+
+    private async Task OnSearch()
+    {
+        var dbUsers = await UserService.GetAllUnvaccinatedUser();
+        if (dbUsers != null)
+        {
+            Users = dbUsers.Where(u => u.LastName == token.LastName).ToList();
+        }
     }
 }
