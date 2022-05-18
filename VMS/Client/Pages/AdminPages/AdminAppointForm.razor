@@ -4,6 +4,7 @@
 @inject NavigationManager NavManager
 @inject IAppointService AppointService
 @inject IToastService Toast
+@inject ILocalStorageService LocalStorage
 
 <section class="admin-body px-3 px-md-5 my-3">
     <div class="top-container d-md-flex align-items-center px-lg-5">
@@ -12,7 +13,7 @@
             <h3 class="title-text">Add Appointments</h3>
         </div>
         <div class="right-box mt-3 mt-md-0">
-            <h4 class="user-email">BATINGAMARK@GMAIL.COM</h4>
+            <h4 class="user-email">@username</h4>
         </div>
     </div>
     <div class="lower-container mt-5">
@@ -110,9 +111,12 @@
     [Parameter]
     public int? Id { get; set; }
     Appoint appoint = new Appoint();
+    string username = "";
 
     protected override async Task OnInitializedAsync()
     {
+        username = await LocalStorage.GetItemAsStringAsync("username");
+        
         if(Id.HasValue)
         {
             var result = await AppointService.GetAppoint(Id.Value);

@@ -2,6 +2,8 @@
 @attribute [Authorize(Roles = "user")]
 @layout UserAuthLayout
 @inject NavigationManager NavManager
+@inject ILocalStorageService LocalStorage
+@inject ILoginService LoginService
 
 <section class="main-body px-3 px-md-5 my-3">
     <div class="lower-container row">
@@ -12,7 +14,7 @@
         </div>
         <div class="col-md d-flex justify-content-center">
             <div class="qr-box d-flex flex-column justify-content-center align-items-center">
-                <h3 class="qr-title">Batinga, Mark Joseph <span class="change-color">QR Code</span></h3>
+                <h3 class="qr-title">@user.LastName, @user.FirstName <span class="change-color">QR Code</span></h3>
                 <img src="./css/images/real-qr.png" alt="real qr code" class="real-qr-img">
             </div>
         </div>
@@ -20,8 +22,16 @@
 </section>
 
 @code {
+    User user = new User();
+
     private void OnVerify()
     {
         NavManager.NavigateTo("user/verification");
+    }
+
+    protected async override Task OnInitializedAsync()
+    {
+        var username = await LocalStorage.GetItemAsStringAsync("username");
+        user = await LoginService.GetUser("username");
     }
 }
